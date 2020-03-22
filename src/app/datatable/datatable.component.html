@@ -1,0 +1,333 @@
+<script src="list-log.component.spec.ts"></script>
+<div class="page-header page-header-light">
+  <div class="page-header-content header-elements-md-inline">
+    <div class="page-title d-flex">
+      <h4><i class="icon-arrow-left52 mr-2"></i> <span
+        class="font-weight-semibold">{{datatableName | translate|titlecase}}</span>
+        - {{"LIST" | translate}}</h4>
+      <a class="header-elements-toggle text-default d-md-none" href="#"><i class="icon-more"></i></a>
+    </div>
+
+    <div class="header-elements d-none">
+      <div class="d-flex justify-content-center">
+        <a class="btn btn-link btn-float text-default" href="#"><i
+          class="icon-bars-alt text-primary"></i><span>{{"STATISTICS" | translate}}</span></a>
+        <a class="btn btn-link btn-float text-default" href="#"><i class="icon-calculator text-primary"></i>
+          <span>{{"INVOICE" | translate}}</span></a>
+        <a class="btn btn-link btn-float text-default" href="#"><i class="icon-calendar5 text-primary"></i>
+          <span>{{"SCHEDULE" | translate}}</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+    <div class="d-flex">
+      <div class="breadcrumb">
+        <a class="breadcrumb-item" routerLink="/"><i class="icon-home2 mr-2"></i> {{"HOME" | translate}}</a>
+        <a class="breadcrumb-item"
+           routerLink="/administration/{{datatableName}}/list">{{datatableName | translate|titlecase}}</a>
+        <span class="breadcrumb-item active">{{"LIST" | translate}}</span>
+      </div>
+
+      <a class="header-elements-toggle text-default d-md-none" href="#"><i class="icon-more"></i></a>
+    </div>
+
+    <div class="header-elements d-none">
+      <div class="breadcrumb justify-content-center">
+        <a class="breadcrumb-elements-item" href="#">
+          <i class="icon-comment-discussion mr-2"></i>
+          {{"SUPPORT" | translate}}
+        </a>
+
+        <div class="breadcrumb-elements-item dropdown p-0">
+          <a class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-gear mr-2"></i>
+            {{"SETTINGS" | translate}}
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#"><i class="icon-user-lock"></i> {{"ACCOUNT_SECURITY" | translate}}</a>
+            <a class="dropdown-item" href="#"><i class="icon-statistics"></i> {{"ANALYTICS" | translate}}</a>
+            <a class="dropdown-item" href="#"><i class="icon-accessibility"></i> {{"ACCESSIBILITY" | translate}}</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="icon-gear"></i> {{"ALL_SETTINGS" | translate}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="content">
+  <div appBlockUi class="card">
+    <div class="card-header header-elements-inline">
+      <h5 class="card-title">{{"List" | translate|titlecase}} {{datatableName|translate|titlecase}}</h5>
+      <div class="header-elements">
+        <div class="list-icons">
+          <a class="list-icons-item" data-action="collapse"></a>
+          <a class="list-icons-item" data-action="reload"></a>
+          <a class="list-icons-item" data-action="remove"></a>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="nbSearchFields>0">
+      {{"SEARCH" | translate}} :
+      <ng-container *ngFor="let header of headers">
+        <p *ngIf="searchFields[header.searchKey]&&searchFields[header.searchKey]!==''">
+          {{header.title|translate}} :
+          {{searchFields[header.searchKey + '_between1'] && searchFields[header.searchKey + '_between2'] ?
+          (searchFields[header.searchKey + '_between1']|date:'dd-MM-yyyy') + '->' + (searchFields[header.searchKey + '_between2']|date:'dd-MM-yyyy') :
+          searchFields[header.searchKey]
+          }}
+          <button (click)="reset(header.isDate,header.sortKey)" nz-button
+                  nzSize="small">{{"RESET" | translate }}</button>
+        </p>
+      </ng-container>
+    </div>
+
+    <!--<nz-list [nzDataSource]="logs" nzBordered [nzRenderItem]="defaultItem" [nzPagination]="pagination">
+      <ng-template #defaultItem let-log>
+        <nz-list-item>
+          in {{ log.log_name }},
+          at {{log.created_at}},
+          {{log.description}}
+          {{log.subject_id ? 'on ' + log.subject_type.split('\\')[1] + ' id ' + log.subject_id : null}}
+          {{log.causer_id ? 'on ' + log.causer_type.split('\\')[1] + ' id ' + log.causer_id : null}}
+        </nz-list-item>
+      </ng-template>
+    </nz-list>-->
+    <div class="overflow-auto">
+
+      <nz-table #basicTable [nzData]="dataToDisplay" [nzFrontPagination]="false" [nzLoading]="loading">
+        <thead (nzSortChange)="sort($event)" nzSingleSort>
+        <tr>
+          <th *ngIf="hasDetails"></th>
+          <th *ngFor="let header of headers;let i=index"
+              nzCustomFilter [nzShowSort]="header.sortKey!==null"
+              [nzSortKey]="header.sortKey">{{header.title | translate}}
+
+            <i *ngIf="header.searchKey!==null"
+               #searchIcon="nzDropdown"
+               [class.ant-table-filter-open]="searchIcon.nzVisible"
+               [nzClickHide]="true"
+               (click)="setSearch(i)"
+               [nzDropdownMenu]="header.isDate?dateDropDown:searchDropDown"
+               class="ant-table-filter-icon"
+               nz-dropdown
+               nz-icon
+               nz-th-extra
+               nzPlacement="bottomRight"
+               nzTableFilter
+               nzTrigger="click"
+               nzType="search"
+            ></i>
+          </th>
+          <th
+            *ngIf="(canDo(deletePermission)||(canEditThrowDatatable))">
+            Actions
+          </th>
+        </tr>
+        <!--      <tr>-->
+        <!--        <th nzCustomFilter nzShowSort-->
+        <!--            nzSortKey="log_name">{{"FIELD" | translate}}-->
+
+        <!--          <i-->
+        <!--            #logNameDropdown="nzDropdown"-->
+        <!--            [class.ant-table-filter-open]="logNameDropdown.nzVisible"-->
+        <!--            [nzClickHide]="false"-->
+        <!--            [nzDropdownMenu]="searchLogName"-->
+        <!--            class="ant-table-filter-icon"-->
+        <!--            nz-dropdown-->
+        <!--            nz-icon-->
+        <!--            nz-th-extra-->
+        <!--            nzPlacement="bottomRight"-->
+        <!--            nzTableFilter-->
+        <!--            nzTrigger="click"-->
+        <!--            nzType="search"-->
+        <!--          ></i>-->
+        <!--        </th>-->
+        <!--        <th nzCustomFilter nzShowSort-->
+        <!--            nzSortKey="description">{{"DESCRIPTION" | translate}}-->
+
+        <!--          <i-->
+        <!--            #descriptionDropdown="nzDropdown"-->
+        <!--            [class.ant-table-filter-open]="descriptionDropdown.nzVisible"-->
+        <!--            [nzClickHide]="false"-->
+        <!--            [nzDropdownMenu]="searchDescription"-->
+        <!--            class="ant-table-filter-icon"-->
+        <!--            nz-dropdown-->
+        <!--            nz-icon-->
+        <!--            nz-th-extra-->
+        <!--            nzPlacement="bottomRight"-->
+        <!--            nzTableFilter-->
+        <!--            nzTrigger="click"-->
+        <!--            nzType="search"-->
+        <!--          ></i>-->
+        <!--        </th>-->
+        <!--        <th nzCustomFilter nzShowSort-->
+        <!--            nzSortKey="subject_type">{{"ON" | translate}}-->
+        <!--        </th>-->
+        <!--        <th nzCustomFilter nzShowSort-->
+        <!--            nzSortKey="user@name">{{"USER" | translate}}-->
+
+        <!--          <i-->
+        <!--            #userDropdown="nzDropdown"-->
+        <!--            [class.ant-table-filter-open]="userDropdown.nzVisible"-->
+        <!--            [nzClickHide]="false"-->
+        <!--            [nzDropdownMenu]="searchUser"-->
+        <!--            class="ant-table-filter-icon"-->
+        <!--            nz-dropdown-->
+        <!--            nz-icon-->
+        <!--            nz-th-extra-->
+        <!--            nzPlacement="bottomRight"-->
+        <!--            nzTableFilter-->
+        <!--            nzTrigger="click"-->
+        <!--            nzType="search"-->
+        <!--          ></i>-->
+        <!--        <th nzCustomFilter nzShowSort-->
+        <!--            [nzSort]="sortBy?(sortBy.key==='created_at'?(sortBy.value==='asc'?'ascend':'descend'):null):null"-->
+        <!--            nzSortKey="created_at">{{"DATE" | translate}}-->
+        <!--          <i-->
+        <!--            #dateDropdown="nzDropdown"-->
+        <!--            [class.ant-table-filter-open]="dateDropdown.nzVisible"-->
+        <!--            [nzClickHide]="false"-->
+        <!--            [nzDropdownMenu]="searchDate"-->
+        <!--            class="ant-table-filter-icon"-->
+        <!--            nz-dropdown-->
+        <!--            nz-icon-->
+        <!--            nz-th-extra-->
+        <!--            nzPlacement="bottomRight"-->
+        <!--            nzTableFilter-->
+        <!--            nzTrigger="click"-->
+        <!--            nzType="search"-->
+        <!--          ></i></th>-->
+        <!--      </tr>-->
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of basicTable.data;let j=index"
+            [class.editable-row]="canEditThrowDatatable"
+            [class.cursor-pointer]="canEditThrowForm"
+            (click)="hasDetails?updateCheckBox(j,$event):null"
+            (dblclick)="canEditThrowForm?navigateTo(createUpdateRoute(data[data.length-1])):null">
+          <td *ngIf="hasDetails" nzShowCheckbox [class.selected-td]="selectedLine===j"
+              (nzCheckedChange)="updateCheckBox(j)"
+              [nzChecked]="selectedLine===j"></td>
+          <ng-container *ngFor="let field of data;let l=last;let i=index">
+            <td [class.selected-td]="selectedLine===j" *ngIf="!l&&!headers[i].datatableEditKey">
+              {{field}}
+            </td>
+            <td [class.selected-td]="selectedLine===j" *ngIf="!l&&headers[i].datatableEditKey">
+              <div class="editable-cell" *ngIf="!editCache[data[data.length-1]].edit; else editCode">
+                <div class="editable-cell-value-wrap">
+                  {{field}}
+                </div>
+              </div>
+              <ng-template #editCode>
+                <input type="text" nz-input
+                       [(ngModel)]="editCache[data[data.length-1]].data[headers[i].datatableEditKey]"/>
+              </ng-template>
+            </td>
+
+            <td [class.selected-td]="selectedLine===j"
+                *ngIf="l&&(canDo(deletePermission)||(canEditThrowDatatable))"
+                [class.editable-row-operations]="canEditThrowDatatable">
+              <ng-container *ngIf="!editCache[data[data.length-1]].edit; else saveTpl">
+
+                <a class="p-1 btn mr-2" (click)="startEdit(data[data.length-1])"
+                   *ngIf="canEditThrowDatatable">
+                  <i nz-icon nzType="edit" nzTheme="outline"></i>
+                </a>
+                <nz-divider
+                  *ngIf="canEditThrowDatatable&&canDo(deletePermission)"
+                  nzType="vertical"></nz-divider>
+                <a class="p-1 btn" *ngIf="canDo(deletePermission)" (click)="deleteElement(field,$event)">
+                  <i nz-icon nzType="delete" nzTheme="outline"></i>
+                </a>
+              </ng-container>
+              <ng-template #saveTpl>
+                <a (click)="saveEdit(data[data.length-1])" *ngIf="!compareObjects(data[data.length-1])" class="mr-2">
+                  <i nz-icon nzType="save" nzTheme="outline"></i>
+                </a>
+                <a *ngIf="compareObjects(data[data.length-1])" (click)="cancelEdit(data[data.length-1])">
+                  <i nz-icon nzType="close" nzTheme="outline"></i>
+                </a>
+                <a nz-popconfirm nzTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data[data.length-1])"
+                   *ngIf="!compareObjects(data[data.length-1])">
+                  <i nz-icon nzType="close" nzTheme="outline"></i>
+                </a>
+              </ng-template>
+            </td>
+          </ng-container>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <!--    <ng-container *ngFor="let header of headers">-->
+
+    <nz-dropdown-menu #searchDropDown="nzDropdownMenu">
+      <div class="search-box">
+        <input [(ngModel)]="searchFields[searchKey]" nz-input placeholder="Search {{searchPlaceholder}}" type="text"/>
+        <button (click)="search()" class="search-button" nz-button nzSize="small" nzType="primary">
+          {{"SEARCH" | translate}}
+        </button>
+        <button (click)="reset(false)" nz-button nzSize="small">{{"RESET" | translate}}</button>
+      </div>
+    </nz-dropdown-menu>
+    <nz-dropdown-menu #dateDropDown="nzDropdownMenu">
+      <div class="search-box">
+        <nz-range-picker [(ngModel)]="searchFields[searchKey]" (ngModelChange)="rangeChange($event)"></nz-range-picker>
+        <br>
+        <button (click)="search()" class="search-button" nz-button nzSize="small" nzType="primary">
+          {{"SEARCH" | translate}}
+        </button>
+        <button (click)="reset(true)" nz-button nzSize="small">{{"RESET" | translate}}</button>
+      </div>
+    </nz-dropdown-menu>
+    <!--    </ng-container>-->
+    <!--    <nz-dropdown-menu #searchDropDown="nzDropdownMenu" *ngIf="'abc'!==null">-->
+    <!--      <div class="search-box">-->
+    <!--        <input [(ngModel)]="searchFields['abc']" nz-input placeholder="Search name" type="text"/>-->
+    <!--        <button (click)="search('abc')" class="search-button" nz-button nzSize="small" nzType="primary">-->
+    <!--          {{"SEARCH" | translate}}-->
+    <!--        </button>-->
+    <!--        <button (click)="reset('abc')" nz-button nzSize="small">{{"RESET" | translate}}</button>-->
+    <!--      </div>-->
+    <!--    </nz-dropdown-menu>-->
+    <!--    <nz-dropdown-menu #searchDescription="nzDropdownMenu">-->
+    <!--      <div class="search-box">-->
+    <!--        <input [(ngModel)]="searchFields['description']" nz-input placeholder="Search name" type="text"/>-->
+    <!--        <button (click)="search('description')" class="search-button" nz-button nzSize="small" nzType="primary">-->
+    <!--          {{"SEARCH" | translate}}-->
+    <!--        </button>-->
+    <!--        <button (click)="reset('description')" nz-button nzSize="small">{{"RESET" | translate}}</button>-->
+    <!--      </div>-->
+    <!--    </nz-dropdown-menu>-->
+
+    <!--    <nz-dropdown-menu #searchUser="nzDropdownMenu">-->
+    <!--      <div class="search-box">-->
+    <!--        <input [(ngModel)]="searchFields['user@name']" nz-input placeholder="Search name" type="text"/>-->
+    <!--        <button (click)="search('user@name')" class="search-button" nz-button nzSize="small" nzType="primary">-->
+    <!--          {{"SEARCH" | translate}}-->
+    <!--        </button>-->
+    <!--        <button (click)="reset('user@name')" nz-button nzSize="small">{{"RESET" | translate}}</button>-->
+    <!--      </div>-->
+    <!--    </nz-dropdown-menu>-->
+
+    <!--    <nz-dropdown-menu #searchDate="nzDropdownMenu">-->
+    <!--      <div class="search-box">-->
+    <!--        <input [(ngModel)]="searchFields['created_at']" nz-input placeholder="Search date" type="text"/>-->
+    <!--        <button (click)="search('created_at')" class="search-button" nz-button nzSize="small" nzType="primary">-->
+    <!--          {{"SEARCH" | translate}}-->
+    <!--        </button>-->
+    <!--        <button (click)="reset('created_at')" nz-button nzSize="small">{{"RESET" | translate}}</button>-->
+    <!--      </div>-->
+    <!--    </nz-dropdown-menu>-->
+
+    <nz-pagination #pagination (nzPageIndexChange)="loadData($event)" [nzPageSize]="10" [(nzPageIndex)]="pageIndex"
+                   [nzTotal]="nbElements"></nz-pagination>
+
+  </div>
+</div>
