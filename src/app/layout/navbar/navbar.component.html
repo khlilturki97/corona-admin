@@ -16,7 +16,7 @@
           <a href="sign-in.html" title="Sign out"><i class="zmdi zmdi-power"></i></a>
         </div>
       </li>
-      <li class="active open">
+      <li>
         <a class="menu-toggle" href="javascript:void(0);">
           <i class="zmdi zmdi-shopping-cart"></i>
           <span>Commandes</span>
@@ -50,6 +50,51 @@
           <li>
             <a routerLink="/order/pending">
               Commandes en attente
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="menu-toggle" href="javascript:void(0);">
+          <i class="zmdi zmdi-shopping-cart"></i>
+          <span>clients</span>
+        </a>
+        <ul class="ml-menu">
+          <li>
+            <a routerLink="/user/client">
+              Liste clients
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="menu-toggle" href="javascript:void(0);">
+          <i class="zmdi zmdi-shopping-cart"></i>
+          <span>livreur</span>
+        </a>
+        <ul class="ml-menu">
+          <li>
+            <a routerLink="/user/delivery-man/form">
+              Ajouter livreur
+            </a>
+            <a routerLink="/user/delivery-man">
+              Liste livreur
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="menu-toggle" href="javascript:void(0);">
+          <i class="zmdi zmdi-shopping-cart"></i>
+          <span>admins</span>
+        </a>
+        <ul class="ml-menu">
+          <li>
+            <a routerLink="/user/admin/form">
+              Ajouter admin
+            </a>
+            <a routerLink="/user/admin">
+              Liste admins
             </a>
           </li>
         </ul>

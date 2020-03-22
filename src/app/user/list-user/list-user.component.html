@@ -1,0 +1,5 @@
+<app-datatable (selectedData)="selectedUser=$event" [fieldsName]="fieldsName" [hasDetails]="type!=='admin'"
+               [headers]="headers" [canEdit]="canEdit"
+               [url]="url"></app-datatable>
+
+<app-detail-user [user]="selectedUser"></app-detail-user>

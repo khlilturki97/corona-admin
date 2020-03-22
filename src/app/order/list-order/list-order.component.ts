@@ -12,9 +12,8 @@ import {HeaderModel} from '../../datatable/models/header.model';
 })
 export class ListOrderComponent implements OnInit {
 
-  orderUrl: string;
-  orders: OrderModel[];
-  orderType;
+  url: string;
+  type;
   headers: HeaderModel[];
   fieldsName: string[];
   selectedOrder: OrderModel;
@@ -23,24 +22,24 @@ export class ListOrderComponent implements OnInit {
               private route: ActivatedRoute) {
     route.params
       .subscribe(params => {
-        this.orderType = params.type;
-        if (this.orderType === 'passed') {
-          this.orderUrl = BASE_API + ORDER + PASSED
-        } else if (this.orderType === 'confirmed') {
-          this.orderUrl = BASE_API + ORDER + CONFIRMED
-        } else if (this.orderType === 'shipping') {
-          this.orderUrl = BASE_API + ORDER + SHIPPING
-        } else if (this.orderType === 'shipped') {
-          this.orderUrl = BASE_API + ORDER + SHIPPED
-        } else if (this.orderType === 'canceled') {
-          this.orderUrl = BASE_API + ORDER + CANCELED
-        } else if (this.orderType === 'pending') {
-          this.orderUrl = BASE_API + ORDER + NOT_ASSIGNED
+        this.type = params.type;
+        if (this.type === 'passed') {
+          this.url = BASE_API + ORDER + PASSED
+        } else if (this.type === 'confirmed') {
+          this.url = BASE_API + ORDER + CONFIRMED
+        } else if (this.type === 'shipping') {
+          this.url = BASE_API + ORDER + SHIPPING
+        } else if (this.type === 'shipped') {
+          this.url = BASE_API + ORDER + SHIPPED
+        } else if (this.type === 'canceled') {
+          this.url = BASE_API + ORDER + CANCELED
+        } else if (this.type === 'pending') {
+          this.url = BASE_API + ORDER + NOT_ASSIGNED
         }
-        console.log(this.orderUrl)
+        console.log(this.url)
         this.selectedOrder = null
         // this.show = true
-        if (this.orderType === 'passed') {
+        if (this.type === 'passed') {
 
           this.headers = [
             {
@@ -101,8 +100,8 @@ export class ListOrderComponent implements OnInit {
             },
             {
               title: 'zone',
-              searchKey: 'client@clientDetails@city',
-              sortKey: 'client@clientDetails@city'
+              searchKey: 'client@city',
+              sortKey: 'client@city'
             },
             {
               title: 'created_at',
@@ -115,7 +114,7 @@ export class ListOrderComponent implements OnInit {
             'price_min',
             'price_max',
             'delivery_man.first_name',
-            'client.client_details.city',
+            'client.city',
             'created_at'
           ]
         }

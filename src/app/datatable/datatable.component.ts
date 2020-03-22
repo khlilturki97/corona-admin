@@ -153,8 +153,9 @@ export class DatatableComponent implements OnInit, OnChanges {
   }
 
   get canEditThrowForm() {
+    console.log(this.canEdit.editWhere === 'form' || this.canEdit.editWhere === 'both')
     return this.canEdit ?
-      this.canDo(this.canEdit.editPermission) && (this.canEdit.editWhere === 'form' || this.canEdit.editWhere === 'both') :
+      (this.canEdit.editWhere === 'form' || this.canEdit.editWhere === 'both') :
       false;
   }
 
@@ -367,14 +368,15 @@ export class DatatableComponent implements OnInit, OnChanges {
   createUpdateRoute(id) {
     // @ts-ignore
     const routeFragments = this.route._routerState.snapshot.url.split('/');
-    delete routeFragments[routeFragments.length - 1];
-    return routeFragments.join('/') + 'update/' + id;
+    // delete routeFragments[routeFragments.length - 1];
+    return routeFragments.join('/') + '/form/' + id;
   }
 
   /**
    * Navigate to
    */
   navigateTo(path) {
+    console.log('navigating')
     this.router.navigate([path]);
   }
 

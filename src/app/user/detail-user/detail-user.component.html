@@ -1,0 +1,36 @@
+<ng-container *ngIf="user">
+  <p>
+    Client : {{user.first_name}} {{user.last_name}}<br>
+    Address : {{user.client_details.address}}
+    , {{user.city}} {{user.client_details.zip_code}}
+  </p>
+  <div *ngIf="user.orders">
+    Commande
+    <ul>
+      <li *ngFor="let order of user.orders">
+        Date : {{order.created_at}}
+        <ul>
+          <li>
+            Statut
+            : {{order.status === 0 ? 'annulée' : (order.status === 1 ? 'passée' : (order.status === 2 ? 'confirmée' : (order.status === 4 ? 'en livraison' : 'livrée')))}}
+          </li>
+          <li>
+            Min {{order.price_min}}
+          </li>
+          <li>
+            Max {{order.price_max}}
+          </li>
+          <li>
+            Produits
+            <ul>
+              <li *ngFor="let product of order.products">
+                Produit : {{product.name}} <br>
+                Quantité : {{product.pivot.quantity}}
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</ng-container>

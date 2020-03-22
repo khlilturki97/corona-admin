@@ -7,6 +7,7 @@ export class OrderModel {
   price_max: number
   status: number
   products: ProductModel[]
-  client:UserModel
-  delivery_man:UserModel
+  client: UserModel
+  delivery_man: UserModel
+  created_at: string;
 }
