@@ -1,68 +1,9 @@
-<script src="list-log.component.spec.ts"></script>
-<div class="page-header page-header-light">
-  <div class="page-header-content header-elements-md-inline">
-    <div class="page-title d-flex">
-      <h4><i class="icon-arrow-left52 mr-2"></i> <span
-        class="font-weight-semibold">{{datatableName | translate|titlecase}}</span>
-        - {{"LIST" | translate}}</h4>
-      <a class="header-elements-toggle text-default d-md-none" href="#"><i class="icon-more"></i></a>
-    </div>
-
-    <div class="header-elements d-none">
-      <div class="d-flex justify-content-center">
-        <a class="btn btn-link btn-float text-default" href="#"><i
-          class="icon-bars-alt text-primary"></i><span>{{"STATISTICS" | translate}}</span></a>
-        <a class="btn btn-link btn-float text-default" href="#"><i class="icon-calculator text-primary"></i>
-          <span>{{"INVOICE" | translate}}</span></a>
-        <a class="btn btn-link btn-float text-default" href="#"><i class="icon-calendar5 text-primary"></i>
-          <span>{{"SCHEDULE" | translate}}</span></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
-    <div class="d-flex">
-      <div class="breadcrumb">
-        <a class="breadcrumb-item" routerLink="/"><i class="icon-home2 mr-2"></i> {{"HOME" | translate}}</a>
-        <a class="breadcrumb-item"
-           routerLink="/administration/{{datatableName}}/list">{{datatableName | translate|titlecase}}</a>
-        <span class="breadcrumb-item active">{{"LIST" | translate}}</span>
-      </div>
-
-      <a class="header-elements-toggle text-default d-md-none" href="#"><i class="icon-more"></i></a>
-    </div>
-
-    <div class="header-elements d-none">
-      <div class="breadcrumb justify-content-center">
-        <a class="breadcrumb-elements-item" href="#">
-          <i class="icon-comment-discussion mr-2"></i>
-          {{"SUPPORT" | translate}}
-        </a>
-
-        <div class="breadcrumb-elements-item dropdown p-0">
-          <a class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-gear mr-2"></i>
-            {{"SETTINGS" | translate}}
-          </a>
-
-          <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="#"><i class="icon-user-lock"></i> {{"ACCOUNT_SECURITY" | translate}}</a>
-            <a class="dropdown-item" href="#"><i class="icon-statistics"></i> {{"ANALYTICS" | translate}}</a>
-            <a class="dropdown-item" href="#"><i class="icon-accessibility"></i> {{"ACCESSIBILITY" | translate}}</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><i class="icon-gear"></i> {{"ALL_SETTINGS" | translate}}</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <div class="content">
   <div appBlockUi class="card">
     <div class="card-header header-elements-inline">
-      <h5 class="card-title">{{"List" | translate|titlecase}} {{datatableName|translate|titlecase}}</h5>
+      <h5 class="card-title">{{"List" |titlecase}} {{datatableName|titlecase}}</h5>
       <div class="header-elements">
         <div class="list-icons">
           <a class="list-icons-item" data-action="collapse"></a>
@@ -73,16 +14,16 @@
     </div>
 
     <div *ngIf="nbSearchFields>0">
-      {{"SEARCH" | translate}} :
+      {{"SEARCH" }} :
       <ng-container *ngFor="let header of headers">
         <p *ngIf="searchFields[header.searchKey]&&searchFields[header.searchKey]!==''">
-          {{header.title|translate}} :
+          {{header.titl}} :
           {{searchFields[header.searchKey + '_between1'] && searchFields[header.searchKey + '_between2'] ?
           (searchFields[header.searchKey + '_between1']|date:'dd-MM-yyyy') + '->' + (searchFields[header.searchKey + '_between2']|date:'dd-MM-yyyy') :
           searchFields[header.searchKey]
           }}
           <button (click)="reset(header.isDate,header.sortKey)" nz-button
-                  nzSize="small">{{"RESET" | translate }}</button>
+                  nzSize="small">{{"RESET"  }}</button>
         </p>
       </ng-container>
     </div>
@@ -106,7 +47,7 @@
           <th *ngIf="hasDetails"></th>
           <th *ngFor="let header of headers;let i=index"
               nzCustomFilter [nzShowSort]="header.sortKey!==null"
-              [nzSortKey]="header.sortKey">{{header.title | translate}}
+              [nzSortKey]="header.sortKey">{{header.title }}
 
             <i *ngIf="header.searchKey!==null"
                #searchIcon="nzDropdown"
@@ -131,7 +72,7 @@
         </tr>
         <!--      <tr>-->
         <!--        <th nzCustomFilter nzShowSort-->
-        <!--            nzSortKey="log_name">{{"FIELD" | translate}}-->
+        <!--            nzSortKey="log_name">{{"FIELD" }}-->
 
         <!--          <i-->
         <!--            #logNameDropdown="nzDropdown"-->
@@ -149,7 +90,7 @@
         <!--          ></i>-->
         <!--        </th>-->
         <!--        <th nzCustomFilter nzShowSort-->
-        <!--            nzSortKey="description">{{"DESCRIPTION" | translate}}-->
+        <!--            nzSortKey="description">{{"DESCRIPTION" }}-->
 
         <!--          <i-->
         <!--            #descriptionDropdown="nzDropdown"-->
@@ -167,10 +108,10 @@
         <!--          ></i>-->
         <!--        </th>-->
         <!--        <th nzCustomFilter nzShowSort-->
-        <!--            nzSortKey="subject_type">{{"ON" | translate}}-->
+        <!--            nzSortKey="subject_type">{{"ON" }}-->
         <!--        </th>-->
         <!--        <th nzCustomFilter nzShowSort-->
-        <!--            nzSortKey="user@name">{{"USER" | translate}}-->
+        <!--            nzSortKey="user@name">{{"USER" }}-->
 
         <!--          <i-->
         <!--            #userDropdown="nzDropdown"-->
@@ -188,7 +129,7 @@
         <!--          ></i>-->
         <!--        <th nzCustomFilter nzShowSort-->
         <!--            [nzSort]="sortBy?(sortBy.key==='created_at'?(sortBy.value==='asc'?'ascend':'descend'):null):null"-->
-        <!--            nzSortKey="created_at">{{"DATE" | translate}}-->
+        <!--            nzSortKey="created_at">{{"DATE" }}-->
         <!--          <i-->
         <!--            #dateDropdown="nzDropdown"-->
         <!--            [class.ant-table-filter-open]="dateDropdown.nzVisible"-->
@@ -271,9 +212,9 @@
       <div class="search-box">
         <input [(ngModel)]="searchFields[searchKey]" nz-input placeholder="Search {{searchPlaceholder}}" type="text"/>
         <button (click)="search()" class="search-button" nz-button nzSize="small" nzType="primary">
-          {{"SEARCH" | translate}}
+          {{"SEARCH" }}
         </button>
-        <button (click)="reset(false)" nz-button nzSize="small">{{"RESET" | translate}}</button>
+        <button (click)="reset(false)" nz-button nzSize="small">{{"RESET" }}</button>
       </div>
     </nz-dropdown-menu>
     <nz-dropdown-menu #dateDropDown="nzDropdownMenu">
@@ -281,9 +222,9 @@
         <nz-range-picker [(ngModel)]="searchFields[searchKey]" (ngModelChange)="rangeChange($event)"></nz-range-picker>
         <br>
         <button (click)="search()" class="search-button" nz-button nzSize="small" nzType="primary">
-          {{"SEARCH" | translate}}
+          {{"SEARCH" }}
         </button>
-        <button (click)="reset(true)" nz-button nzSize="small">{{"RESET" | translate}}</button>
+        <button (click)="reset(true)" nz-button nzSize="small">{{"RESET" }}</button>
       </div>
     </nz-dropdown-menu>
     <!--    </ng-container>-->
@@ -291,18 +232,18 @@
     <!--      <div class="search-box">-->
     <!--        <input [(ngModel)]="searchFields['abc']" nz-input placeholder="Search name" type="text"/>-->
     <!--        <button (click)="search('abc')" class="search-button" nz-button nzSize="small" nzType="primary">-->
-    <!--          {{"SEARCH" | translate}}-->
+    <!--          {{"SEARCH" }}-->
     <!--        </button>-->
-    <!--        <button (click)="reset('abc')" nz-button nzSize="small">{{"RESET" | translate}}</button>-->
+    <!--        <button (click)="reset('abc')" nz-button nzSize="small">{{"RESET" }}</button>-->
     <!--      </div>-->
     <!--    </nz-dropdown-menu>-->
     <!--    <nz-dropdown-menu #searchDescription="nzDropdownMenu">-->
     <!--      <div class="search-box">-->
     <!--        <input [(ngModel)]="searchFields['description']" nz-input placeholder="Search name" type="text"/>-->
     <!--        <button (click)="search('description')" class="search-button" nz-button nzSize="small" nzType="primary">-->
-    <!--          {{"SEARCH" | translate}}-->
+    <!--          {{"SEARCH" }}-->
     <!--        </button>-->
-    <!--        <button (click)="reset('description')" nz-button nzSize="small">{{"RESET" | translate}}</button>-->
+    <!--        <button (click)="reset('description')" nz-button nzSize="small">{{"RESET" }}</button>-->
     <!--      </div>-->
     <!--    </nz-dropdown-menu>-->
 
@@ -310,9 +251,9 @@
     <!--      <div class="search-box">-->
     <!--        <input [(ngModel)]="searchFields['user@name']" nz-input placeholder="Search name" type="text"/>-->
     <!--        <button (click)="search('user@name')" class="search-button" nz-button nzSize="small" nzType="primary">-->
-    <!--          {{"SEARCH" | translate}}-->
+    <!--          {{"SEARCH" }}-->
     <!--        </button>-->
-    <!--        <button (click)="reset('user@name')" nz-button nzSize="small">{{"RESET" | translate}}</button>-->
+    <!--        <button (click)="reset('user@name')" nz-button nzSize="small">{{"RESET" }}</button>-->
     <!--      </div>-->
     <!--    </nz-dropdown-menu>-->
 
@@ -320,9 +261,9 @@
     <!--      <div class="search-box">-->
     <!--        <input [(ngModel)]="searchFields['created_at']" nz-input placeholder="Search date" type="text"/>-->
     <!--        <button (click)="search('created_at')" class="search-button" nz-button nzSize="small" nzType="primary">-->
-    <!--          {{"SEARCH" | translate}}-->
+    <!--          {{"SEARCH" }}-->
     <!--        </button>-->
-    <!--        <button (click)="reset('created_at')" nz-button nzSize="small">{{"RESET" | translate}}</button>-->
+    <!--        <button (click)="reset('created_at')" nz-button nzSize="small">{{"RESET" }}</button>-->
     <!--      </div>-->
     <!--    </nz-dropdown-menu>-->
 

@@ -1,0 +1,3 @@
+<app-datatable (selectedData)="selectedOrder=$event" [fieldsName]="fieldsName" [hasDetails]="true" [headers]="headers"
+               [url]="orderUrl"></app-datatable>
+<app-detail-order [order]="selectedOrder"></app-detail-order>

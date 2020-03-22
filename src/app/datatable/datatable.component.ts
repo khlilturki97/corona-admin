@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {CrudService} from '../_services/crud.service';
 import {NotyService} from '../_services/noty.service';
 import {SEARCH} from '../_globals/vars';
@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   templateUrl: './datatable.component.html',
   styleUrls: ['./datatable.component.scss']
 })
-export class DatatableComponent implements OnInit {
+export class DatatableComponent implements OnInit, OnChanges {
 
   /**
    * Array to store elements from back
@@ -125,6 +125,20 @@ export class DatatableComponent implements OnInit {
 
 
   // =================================================================================
+
+  constructor(protected crud: CrudService,
+              private router: Router,
+              protected notyService: NotyService = null,
+              private route: ActivatedRoute = null) {
+    this.pageIndex = 1;
+    this.searchFields = [];
+    this.elements = [];
+    this.editCache = {};
+    if (this.defaultSortBy) {
+      this.sortBy = this.defaultSortBy;
+    }
+  }
+
   // getters
   get nbSearchFields() {
     let nb = 0;
@@ -144,26 +158,13 @@ export class DatatableComponent implements OnInit {
       false;
   }
 
+  // =================================================================================
+  // construct and initialization
+
   get canEditThrowDatatable() {
     return this.canEdit ?
       this.canDo(this.canEdit.editPermission) && (this.canEdit.editWhere === 'datatable' || this.canEdit.editWhere === 'both') :
       false;
-  }
-
-  // =================================================================================
-  // construct and initialization
-
-  constructor(protected crud: CrudService,
-              private router: Router,
-              protected notyService: NotyService = null,
-              private route: ActivatedRoute = null) {
-    this.pageIndex = 1;
-    this.searchFields = [];
-    this.elements = [];
-    this.editCache = {};
-    if (this.defaultSortBy) {
-      this.sortBy = this.defaultSortBy;
-    }
   }
 
   ngOnInit() {
@@ -172,68 +173,12 @@ export class DatatableComponent implements OnInit {
     this.extractDatatableName();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngOnInit()
+  }
 
   // =================================================================================
   // Manipulating data methods
-
-  /**
-   * Prepare fieldsToDisplay array
-   *
-   * Used when other component call this component
-   * Loop over fieldsName array and extracts data to display
-   */
-  private prepareFieldsToDisplay() {
-    this.dataToDisplay = [];
-    this.elements.forEach(element => {
-      // const dataToDisplay = [];
-      const result = [];
-      for (const field of this.fieldsName) {
-        const fieldSplit = field.split('.');
-        let output = element[fieldSplit[0]];
-        for (let i = 1; i < fieldSplit.length; i++) {
-          output = output[fieldSplit[i]];
-        }
-        result.push(output);
-      }
-      result.push(element.id);
-      this.dataToDisplay.push(result);
-    });
-    console.log(this.dataToDisplay);
-  }
-
-  /**
-   * Prepare url for get/search request
-   *
-   * Check if there is fields to search by, if yes add "search/" to the url
-   * Add offset and limit
-   * If sorting by, add sort by field and order
-   * Add fields to search by and value
-   */
-  private prepareUrl(offset: number, limit: number): string {
-    let url: string;
-    this.nbSearchFields > 0 ? url = this.url + SEARCH : url = this.url;
-
-    url += ('?offset=' + offset + '&limit=' + limit);
-
-    if (this.sortBy) {
-      url += ('&order_by=' + this.sortBy.key + '&order_by_type=' + this.sortBy.value);
-    }
-
-    console.log(Object.keys(this.searchFields));
-    for (const field of Object.keys(this.searchFields)) {
-      console.log(field);
-      console.log(this.searchFields[field]);
-      if (this.searchFields[field] && this.searchFields[field] !== '') {
-        if (this.searchFields[field + '_between1'] && this.searchFields[field + '_between2']) {
-          url += ('&' + field + '=' + this.searchFields[field + '_between1']);
-          url += ('&' + field + '=' + this.searchFields[field + '_between2']);
-        } else {
-          url += ('&' + field + '=' + this.searchFields[field]);
-        }
-      }
-    }
-    return url;
-  }
 
   /**
    * Get data with pagination
@@ -286,7 +231,6 @@ export class DatatableComponent implements OnInit {
     this.pageIndex = 1;
   }
 
-
   /**
    * Delete element
    */
@@ -302,10 +246,6 @@ export class DatatableComponent implements OnInit {
         });
     }
   }
-
-
-  // =================================================================================
-  // searching methods
 
   search() {
     // @ts-ignore
@@ -331,6 +271,10 @@ export class DatatableComponent implements OnInit {
     this.pageIndex = 1;
   }
 
+
+  // =================================================================================
+  // searching methods
+
   setSearch(i: number) {
     this.searchKey = this.headers[i].searchKey;
     this.searchPlaceholder = this.headers[i].title;
@@ -344,10 +288,6 @@ export class DatatableComponent implements OnInit {
     this.searchFields[this.searchKey + '_between2'] = date2;
     console.log(this.searchFields);
   }
-
-
-  // =================================================================================
-  // editing from datatable methods
 
   /**
    * Enable editing in datatable
@@ -366,6 +306,10 @@ export class DatatableComponent implements OnInit {
       edit: false
     };
   }
+
+
+  // =================================================================================
+  // editing from datatable methods
 
   /**
    * Save editing in backend
@@ -417,8 +361,6 @@ export class DatatableComponent implements OnInit {
     }
   }
 
-  // =================================================================================
-
   /**
    * Create update route from actual route
    */
@@ -430,23 +372,13 @@ export class DatatableComponent implements OnInit {
   }
 
   /**
-   * Extract datatable name from actual route
-   */
-  private extractDatatableName() {
-    if (this.route) {
-      // @ts-ignore
-      const routeFragments = this.route._routerState.snapshot.url.split('/');
-      const index = routeFragments.indexOf('list') - 1;
-      this.datatableName = routeFragments[index];
-    }
-  }
-
-  /**
    * Navigate to
    */
   navigateTo(path) {
     this.router.navigate([path]);
   }
+
+  // =================================================================================
 
   diff(a, b, namespace?) {
     namespace = (namespace || '') + '.';
@@ -485,10 +417,9 @@ export class DatatableComponent implements OnInit {
   }
 
   canDo(permission) {
-    // if (!permission) {
-    //   return false;
-    // }
-    // return PermissionService.hasPermission(permission);
+    if (!permission) {
+      return false;
+    }
     return true;
   }
 
@@ -501,5 +432,78 @@ export class DatatableComponent implements OnInit {
       this.selectedData.emit(this.elements[this.selectedLine]) :
       this.selectedData.emit(null);
 
+  }
+
+  /**
+   * Prepare fieldsToDisplay array
+   *
+   * Used when other component call this component
+   * Loop over fieldsName array and extracts data to display
+   */
+  private prepareFieldsToDisplay() {
+    this.dataToDisplay = [];
+    this.elements.forEach(element => {
+      // const dataToDisplay = [];
+      const result = [];
+      for (const field of this.fieldsName) {
+        const fieldSplit = field.split('.');
+        let output = element[fieldSplit[0]];
+        for (let i = 1; i < fieldSplit.length; i++) {
+          output = output[fieldSplit[i]];
+        }
+        result.push(output);
+      }
+      result.push(element.id);
+      this.dataToDisplay.push(result);
+    });
+    console.log(this.dataToDisplay);
+  }
+
+  /**
+   * Prepare url for get/search request
+   *
+   * Check if there is fields to search by, if yes add "search/" to the url
+   * Add offset and limit
+   * If sorting by, add sort by field and order
+   * Add fields to search by and value
+   */
+  private prepareUrl(offset: number, limit: number): string {
+    let url: string;
+    this.nbSearchFields > 0 ?
+      url = this.url.split('?')[0] + SEARCH + (this.url.split('?')[1] ? '?' + this.url.split('?')[1] : '') :
+      url = this.url;
+
+    url += (!url.includes('?') ? '?' : '&') + 'offset=' + offset + '&limit=' + limit;
+
+    if (this.sortBy) {
+      url += ('&order_by=' + this.sortBy.key + '&order_by_type=' + this.sortBy.value);
+    }
+
+    console.log(Object.keys(this.searchFields));
+    for (const field of Object.keys(this.searchFields)) {
+      console.log(field);
+      console.log(this.searchFields[field]);
+      if (this.searchFields[field] && this.searchFields[field] !== '') {
+        if (this.searchFields[field + '_between1'] && this.searchFields[field + '_between2']) {
+          url += ('&' + field + '=' + this.searchFields[field + '_between1']);
+          url += ('&' + field + '=' + this.searchFields[field + '_between2']);
+        } else {
+          url += ('&' + field + '=' + this.searchFields[field]);
+        }
+      }
+    }
+    return url;
+  }
+
+  /**
+   * Extract datatable name from actual route
+   */
+  private extractDatatableName() {
+    if (this.route) {
+      // @ts-ignore
+      const routeFragments = this.route._routerState.snapshot.url.split('/');
+      const index = routeFragments.indexOf('list') - 1;
+      this.datatableName = routeFragments[index];
+    }
   }
 }

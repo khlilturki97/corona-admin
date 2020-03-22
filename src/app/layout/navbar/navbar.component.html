@@ -1,10 +1,10 @@
 <!-- Left Sidebar -->
-<aside id="leftsidebar" class="sidebar">
+<aside class="sidebar" id="leftsidebar">
   <div class="menu">
     <ul class="list">
       <li>
         <div class="user-info">
-          <div class="image"><a href="profile.html"><img src="assets/images/profile_av.jpg" alt="User"></a></div>
+          <div class="image"><a href="profile.html"><img alt="User" src="assets/images/profile_av.jpg"></a></div>
           <div class="detail">
             <h4>Michael</h4>
             <small>UI UX Designer</small>
@@ -16,23 +16,55 @@
           <a href="sign-in.html" title="Sign out"><i class="zmdi zmdi-power"></i></a>
         </div>
       </li>
-      <li class="active open"> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-shopping-cart"></i><span>Ecommerce</span> </a>
+      <li class="active open">
+        <a class="menu-toggle" href="javascript:void(0);">
+          <i class="zmdi zmdi-shopping-cart"></i>
+          <span>Commandes</span>
+        </a>
         <ul class="ml-menu">
-          <li> <a routerLink="/home">Acceuil</a></li>
-          <li class="active"> <a routerLink="/categories">Liste des produits</a></li>
-          <li> <a routerLink="/order-history">Historique des commandes</a></li>
+          <li>
+            <a routerLink="/order/passed">
+              Commandes passées
+            </a>
+          </li>
+          <li>
+            <a routerLink="/order/confirmed">
+              Commandes confirmées
+            </a>
+          </li>
+          <li>
+            <a routerLink="/order/shipping">
+              Commandes en cours de livraison
+            </a>
+          </li>
+          <li>
+            <a routerLink="/order/shipped">
+              Commandes livrées
+            </a>
+          </li>
+          <li>
+            <a routerLink="/order/canceled">
+              Commandes annulées
+            </a>
+          </li>
+          <li>
+            <a routerLink="/order/pending">
+              Commandes en attente
+            </a>
+          </li>
         </ul>
       </li>
-      <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-shopping-cart"></i><span>Profile</span> </a>
+      <li><a class="menu-toggle" href="javascript:void(0);"><i class="zmdi zmdi-shopping-cart"></i><span>Profile</span>
+      </a>
         <ul class="ml-menu">
-          <li> <a routerLink="/profile">Consulter profil</a></li>
+          <li><a routerLink="/profile">Consulter profil</a></li>
         </ul>
       </li>
-      <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-map"></i><span>Maps</span> </a>
+      <li><a class="menu-toggle" href="javascript:void(0);"><i class="zmdi zmdi-map"></i><span>Maps</span> </a>
         <ul class="ml-menu">
-          <li> <a href="google.html">Google Map</a> </li>
-          <li> <a href="yandex.html">YandexMap</a> </li>
-          <li> <a href="jvectormap.html">jVectorMap</a> </li>
+          <li><a href="google.html">Google Map</a></li>
+          <li><a href="yandex.html">YandexMap</a></li>
+          <li><a href="jvectormap.html">jVectorMap</a></li>
         </ul>
       </li>
     </ul>

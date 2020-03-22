@@ -19,4 +19,8 @@ export const AppRoutes: Routes = [
   //   path: '**',
   //   redirectTo: 'dashboard'
   // }
+  {
+    path: 'order',
+    loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
+  }
 ]

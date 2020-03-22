@@ -4,7 +4,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import fr from '@angular/common/locales/fr';
 import {fr_FR, NgZorroAntdModule, NZ_I18N} from 'ng-zorro-antd';
-import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {BlockUiDirective} from '../_directives/block-ui.directive';
 import {LoaderInterceptor} from '../_interceptors/loader.interceptor';
@@ -24,7 +23,8 @@ registerLocaleData(fr);
     ReactiveFormsModule,
     FormsModule,
     NgZorroAntdModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
 
   ],
   providers: [
@@ -41,6 +41,7 @@ registerLocaleData(fr);
     CommonModule,
     BlockUiDirective,
     NgZorroAntdModule,
+    DatatableComponent,
   ]
 })
 

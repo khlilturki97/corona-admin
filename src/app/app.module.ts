@@ -6,6 +6,7 @@ import {AppRoutes} from './app.routing';
 import {FooterComponent} from './layout/footer/footer.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {NavbarComponent} from './layout/navbar/navbar.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {NavbarComponent} from './layout/navbar/navbar.component';
     RouterModule.forRoot(AppRoutes, {
       useHash: true
     }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
