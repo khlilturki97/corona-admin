@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CategoryModel} from '../../_models/category.model';
 import {CrudService} from '../../_services/crud.service';
@@ -10,7 +10,7 @@ import {BASE_API, CATEGORY} from '../../_globals/vars';
   templateUrl: './form-category.component.html',
   styleUrls: ['./form-category.component.css']
 })
-export class FormCategoryComponent implements OnInit {
+export class FormCategoryComponent implements OnInit, OnChanges {
   categoryForm: FormGroup;
   categoryId;
   type;
@@ -34,6 +34,11 @@ export class FormCategoryComponent implements OnInit {
     if (this.categoryId) {
       this.getOneCategory()
     }
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngOnInit()
   }
 
   initCategoryForm() {
@@ -63,7 +68,7 @@ export class FormCategoryComponent implements OnInit {
     // @ts-ignore
     console.log($event.target.files);
     // @ts-ignore
-    this.selectedImage=$event.target.files[0];
+    this.selectedImage = $event.target.files[0];
   }
 
   private getOneCategory() {

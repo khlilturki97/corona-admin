@@ -1,0 +1,79 @@
+<!-- Input -->
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="card">
+      <div class="header">
+        <h2><strong>Catégorie</strong></h2>
+      </div>
+      <div class="body">
+        <form (ngSubmit)="submitForm()" [formGroup]="productForm">
+          <div class="row clearfix">
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <input class="form-control" formControlName="name" placeholder="name" type="text"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="row clearfix">
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <div class="form-line">
+                  <textarea class="form-control no-resize" formControlName="description" placeholder="description"
+                            rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <input class="form-control" formControlName="price_min" min="0" placeholder="price_min" type="number"/>
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <input class="form-control" formControlName="price_max" min="0" placeholder="price_max" type="number"/>
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <input class="form-control" formControlName="max_quantity" min="0" placeholder="max_quantity"
+                       type="number"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="row clearfix">
+            <div class="col-sm-6">
+              <select class="form-control show-tick" formControlName="category_id">
+                <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="row clearfix">
+            <div class="col-md-6 col-12">
+              <div class="dz-message">
+                <div class="drag-icon-cph"><i class="material-icons">touch_app</i></div>
+                <h3>Drop files here or click to upload.</h3>
+                <em>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</em>
+              </div>
+              <div class="fallback">
+                <input #imageInput (change)="processFile($event)"
+                       accept="image/*" name="file" type="file"/>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
