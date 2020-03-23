@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {toFormData} from '../_globals/funct';
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +31,18 @@ export class CrudService {
     return this.http.get<T>(url + '/' + id);
   }
 
-  post(url, values) {
+  post(url, values, isFormData = false) {
+    if (isFormData) {
+      return this.http.post(url, toFormData(values));
+    }
     return this.http.post(url, values);
   }
 
-  update(url, id, values) {
-    return this.http.put(url + '/' + id, values);
+  update(url, id, values, isFormData = false) {
+    if (isFormData) {
+      return this.http.post(url + (id ? '/' + id : ''), toFormData(Object.assign(values, {_method: 'put'})));
+    }
+    return this.http.put(url + (id ? '/' + id : ''), values);
   }
 
   delete(url, id) {

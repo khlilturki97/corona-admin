@@ -82,7 +82,10 @@
               nzShowCheckbox></td>
           <ng-container *ngFor="let field of data;let l=last;let i=index">
             <td *ngIf="!l&&!headers[i].datatableEditKey" [class.selected-td]="selectedLine===j">
-              {{field}}
+              <ng-container *ngIf="!headers[i].isImage">
+                {{field}}
+              </ng-container>
+              <img [src]="field|imageUrl" alt="" *ngIf="headers[i].isImage" style="max-width: 200px">
             </td>
             <td *ngIf="!l&&headers[i].datatableEditKey" [class.selected-td]="selectedLine===j">
               <div *ngIf="!editCache[data[data.length-1]].edit; else editCode" class="editable-cell">
@@ -119,7 +122,8 @@
                 <a (click)="cancelEdit(data[data.length-1])" *ngIf="compareObjects(data[data.length-1])">
                   <i nz-icon nzTheme="outline" nzType="close"></i>
                 </a>
-                <a (nzOnConfirm)="cancelEdit(data[data.length-1])" *ngIf="!compareObjects(data[data.length-1])" nz-popconfirm
+                <a (nzOnConfirm)="cancelEdit(data[data.length-1])" *ngIf="!compareObjects(data[data.length-1])"
+                   nz-popconfirm
                    nzTitle="Sure to cancel?">
                   <i nz-icon nzTheme="outline" nzType="close"></i>
                 </a>

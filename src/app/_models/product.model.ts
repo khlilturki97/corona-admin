@@ -4,4 +4,6 @@ export class ProductModel {
   pivot?: {
     quantity: number
   }
+  price_max: number;
+  price_min: number;
 }

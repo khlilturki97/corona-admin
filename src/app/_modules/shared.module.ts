@@ -10,13 +10,15 @@ import {LoaderInterceptor} from '../_interceptors/loader.interceptor';
 import {ErrorInterceptor} from '../_interceptors/error.interceptor';
 import {AuthInterceptor} from '../_interceptors/auth.interceptor';
 import {DatatableComponent} from '../datatable/datatable.component';
+import {ImageUrlPipe} from '../_pipes/image-url.pipe';
 
 registerLocaleData(fr);
 
 @NgModule({
   declarations: [
     BlockUiDirective,
-    DatatableComponent
+    DatatableComponent,
+    ImageUrlPipe
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ registerLocaleData(fr);
     BlockUiDirective,
     NgZorroAntdModule,
     DatatableComponent,
+    ImageUrlPipe
   ]
 })
 

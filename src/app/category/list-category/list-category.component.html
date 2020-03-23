@@ -1,0 +1,4 @@
+<app-datatable (selectedData)="selectedCategory=$event" [canEdit]="canEdit" [fieldsName]="fieldsName"
+               [hasDetails]="true" [headers]="headers" deletePermission="yes"
+               [url]="url"></app-datatable>
+<app-detail-category [category]="selectedCategory"></app-detail-category>

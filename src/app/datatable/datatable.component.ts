@@ -153,7 +153,6 @@ export class DatatableComponent implements OnInit, OnChanges {
   }
 
   get canEditThrowForm() {
-    console.log(this.canEdit.editWhere === 'form' || this.canEdit.editWhere === 'both')
     return this.canEdit ?
       (this.canEdit.editWhere === 'form' || this.canEdit.editWhere === 'both') :
       false;

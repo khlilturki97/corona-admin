@@ -4,4 +4,5 @@ export class HeaderModel {
   sortKey: string | null;
   isDate?: boolean;
   datatableEditKey?: string;
+  isImage?: boolean;
 }

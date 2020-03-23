@@ -1,5 +1,6 @@
 import {environment} from '../../environments/environment';
 
+
 export const BASE_URL = environment.baseUrl;
 export const BASE_API = BASE_URL + '/api';
 export const SEARCH = '/search';
@@ -12,6 +13,7 @@ export const CANCELED = '/canceled';
 export const DELIVER_MAN = '/delivery-man';
 export const ADMIN = '/admin';
 export const CLIENT = '/client';
+export const CATEGORY = '/category';
 export const NOT_ASSIGNED = '/not-assigned';
 export const LOGIN = 'login';
 export const RESET = 'password/create';
