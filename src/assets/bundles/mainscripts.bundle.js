@@ -1,4 +1,5 @@
 if ("undefined" == typeof jQuery) throw new Error("jQuery plugins need to be before this file");
+console.log('executed');
 $.AdminCompass = {}, $.AdminCompass.options = {
   colors: {
     red: "#ec3b57",

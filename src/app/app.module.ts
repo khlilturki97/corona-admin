@@ -7,6 +7,7 @@ import {FooterComponent} from './layout/footer/footer.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {NavbarComponent} from './layout/navbar/navbar.component';
 import {HttpClientModule} from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
     FooterComponent,
     HeaderComponent,
     NavbarComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserAnimationsModule,

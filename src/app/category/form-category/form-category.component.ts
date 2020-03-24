@@ -4,6 +4,7 @@ import {CategoryModel} from '../../_models/category.model';
 import {CrudService} from '../../_services/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BASE_API, CATEGORY} from '../../_globals/vars';
+import {InitilizeJQScriptsService} from '../../_services/initilize-jqscripts.service';
 
 @Component({
   selector: 'app-form-category',
@@ -21,7 +22,8 @@ export class FormCategoryComponent implements OnInit, OnChanges {
   constructor(private fb: FormBuilder,
               private crud: CrudService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private jqService: InitilizeJQScriptsService) {
     route.params
       .subscribe(params => {
         this.categoryId = params.id;
@@ -30,6 +32,7 @@ export class FormCategoryComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    // this.jqService.initilizeJQScript();
     this.initCategoryForm();
     if (this.categoryId) {
       this.getOneCategory()

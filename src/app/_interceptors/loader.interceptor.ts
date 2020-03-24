@@ -3,10 +3,12 @@ import {HttpBackend, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from 
 import {Observable} from 'rxjs';
 import {finalize} from 'rxjs/operators';
 import {LoaderService} from '../_services/loader.service';
+import {InitilizeJQScriptsService} from '../_services/initilize-jqscripts.service';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
-  constructor(public loaderService: LoaderService) {
+  constructor(public loaderService: LoaderService,
+              private jqService: InitilizeJQScriptsService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CrudService} from '../../_services/crud.service';
 import {ADMIN, BASE_API, DELIVER_MAN} from '../../_globals/vars';
 import {UserModel} from '../../_models/user.model';
+import {InitilizeJQScriptsService} from '../../_services/initilize-jqscripts.service';
 
 @Component({
   selector: 'app-form-user',
@@ -21,7 +22,8 @@ export class FormUserComponent implements OnInit, OnChanges {
   constructor(private fb: FormBuilder,
               private crud: CrudService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private jqService: InitilizeJQScriptsService) {
     route.params
       .subscribe(params => {
         this.userId = params.id;
@@ -36,6 +38,8 @@ export class FormUserComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    // this.jqService.initilizeJQScript();
+
     this.initUserForm();
     if (this.userId) {
       this.getOneUser()
@@ -43,6 +47,7 @@ export class FormUserComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+
     this.ngOnInit()
   }
 

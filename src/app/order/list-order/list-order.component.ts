@@ -4,6 +4,7 @@ import {OrderModel} from '../../_models/order.model';
 import {ActivatedRoute} from '@angular/router';
 import {BASE_API, CANCELED, CONFIRMED, NOT_ASSIGNED, ORDER, PASSED, SHIPPED, SHIPPING} from '../../_globals/vars';
 import {HeaderModel} from '../../datatable/models/header.model';
+import {InitilizeJQScriptsService} from '../../_services/initilize-jqscripts.service';
 
 @Component({
   selector: 'app-list-order',
@@ -19,7 +20,8 @@ export class ListOrderComponent implements OnInit {
   selectedOrder: OrderModel;
 
   constructor(private crud: CrudService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private jqService: InitilizeJQScriptsService) {
     route.params
       .subscribe(params => {
         this.type = params.type;
@@ -122,7 +124,7 @@ export class ListOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    // this.jqService.initilizeJQScript();
   }
 
 }

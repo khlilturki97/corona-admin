@@ -5,6 +5,7 @@ import {CanEditModel} from '../../datatable/models/can-edit.model';
 import {CrudService} from '../../_services/crud.service';
 import {ActivatedRoute} from '@angular/router';
 import {BASE_API, PRODUCT} from '../../_globals/vars';
+import {InitilizeJQScriptsService} from '../../_services/initilize-jqscripts.service';
 
 @Component({
   selector: 'app-list-product',
@@ -20,7 +21,8 @@ export class ListProductComponent implements OnInit {
   canEdit: CanEditModel;
 
   constructor(private crud: CrudService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private jqService: InitilizeJQScriptsService) {
     route.params
       .subscribe(params => {
         this.url = BASE_API + PRODUCT;
@@ -87,6 +89,7 @@ export class ListProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.jqService.initilizeJQScript();
   }
 
 }

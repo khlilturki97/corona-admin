@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserModel} from '../../_models/user.model';
+import {InitilizeJQScriptsService} from '../../_services/initilize-jqscripts.service';
 
 @Component({
   selector: 'app-detail-user',
@@ -7,12 +8,13 @@ import {UserModel} from '../../_models/user.model';
   styleUrls: ['./detail-user.component.css']
 })
 export class DetailUserComponent implements OnInit {
-  @Input() user: UserModel
+  @Input() user: UserModel;
 
-  constructor() {
+  constructor(private jqService: InitilizeJQScriptsService) {
   }
 
   ngOnInit() {
+    // this.jqService.initilizeJQScript();
   }
 
 }

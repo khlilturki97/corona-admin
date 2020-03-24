@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CategoryModel} from '../../_models/category.model';
+import {InitilizeJQScriptsService} from '../../_services/initilize-jqscripts.service';
 
 @Component({
   selector: 'app-detail-category',
@@ -7,12 +8,13 @@ import {CategoryModel} from '../../_models/category.model';
   styleUrls: ['./detail-category.component.css']
 })
 export class DetailCategoryComponent implements OnInit {
-  @Input() category: CategoryModel
+  @Input() category: CategoryModel;
 
-  constructor() {
+  constructor(private jqService: InitilizeJQScriptsService) {
   }
 
   ngOnInit() {
+    // this.jqService.initilizeJQScript();
   }
 
 }

@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ADMIN, BASE_API, CLIENT, DELIVER_MAN} from '../../_globals/vars';
 import {UserModel} from '../../_models/user.model';
 import {CanEditModel} from '../../datatable/models/can-edit.model';
+import {InitilizeJQScriptsService} from '../../_services/initilize-jqscripts.service';
 
 @Component({
   selector: 'app-list-user',
@@ -21,7 +22,8 @@ export class ListUserComponent implements OnInit {
   canEdit: CanEditModel;
 
   constructor(private crud: CrudService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private jqService: InitilizeJQScriptsService) {
     route.params
       .subscribe(params => {
         this.type = params.type;
@@ -121,6 +123,8 @@ export class ListUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.jqService.initilizeJQScript();
+
   }
 
 }

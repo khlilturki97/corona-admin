@@ -5,6 +5,7 @@ import {CrudService} from '../../_services/crud.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BASE_API, CATEGORY, PRODUCT} from '../../_globals/vars';
 import {CategoryModel} from '../../_models/category.model';
+import {InitilizeJQScriptsService} from '../../_services/initilize-jqscripts.service';
 
 @Component({
   selector: 'app-form-product',
@@ -23,7 +24,8 @@ export class FormProductComponent implements OnInit, OnChanges {
   constructor(private fb: FormBuilder,
               private crud: CrudService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private jqService: InitilizeJQScriptsService) {
     route.params
       .subscribe(params => {
         this.productId = params.id;
@@ -35,6 +37,7 @@ export class FormProductComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    // this.jqService.initilizeJQScript();
     this.getAllCategories()
     this.initProductForm();
     if (this.productId) {

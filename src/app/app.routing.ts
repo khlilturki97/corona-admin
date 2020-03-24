@@ -1,24 +1,12 @@
 import {Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
 
 
 export const AppRoutes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'dashboard',
-  //   pathMatch: 'full',
-  // },
-  // {
-  //   path: '',
-  //   component: AdminLayoutComponent,
-  //   children: [
-  //       {
-  //     path: '',
-  //     loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-  // }]},
-  // {
-  //   path: '**',
-  //   redirectTo: 'dashboard'
-  // }
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'order',
     loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
@@ -35,4 +23,4 @@ export const AppRoutes: Routes = [
     path: 'product',
     loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
   }
-]
+];
