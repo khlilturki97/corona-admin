@@ -1,32 +1,71 @@
-<ng-container *ngIf="order">
-  <p>
-    Client : {{order.client.first_name}} {{order.client.last_name}}<br>
-    Address : {{order.client.client_details.address}}
-    , {{order.client.city}} {{order.client.client_details.zip_code}}
-  </p>
-  <p>
-    Livreur : {{order.delivery_man.first_name}} {{order.delivery_man.last_name}}<br>
-  </p>
+<div class="tab-content" *ngIf="order">
+  <div class="tab-pane active" id="usersettings" role="tabpanel">
+    <div class="card">
+      <div class="header">
+        <h2><strong>Informations</strong> du client</h2>
+      </div>
+      <div class="body">
+        <div class="row clearfix">
+          <h3 class="m-b-0" style="font-size: 25px;">Client :<strong class="text-primary" style="font-size: 20px"> {{order.client.first_name}} {{order.client.last_name}}</strong></h3>
+          <h3 class="m-b-0" style="font-size: 25px;" >Adresse :<strong class="text-primary" style="font-size: 20px"> {{order.client.client_details.address}} ,{{order.client.city}} ,{{order.client.client_details.zip_code}}</strong></h3>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h2 ><strong>Informations</strong> du livreur</h2>
+      </div>
+      <div class="body">
+        <div class="row clearfix">
 
-  <div>
-    Details commande :
-    <ul>
-      <li>
-        Min {{order.price_min}}
-      </li>
-      <li>
-        Max {{order.price_max}}
-      </li>
-      <li>
-        Produits
-        <ul>
-          <li *ngFor="let product of order.products">
-            Produit : {{product.name}} <br>
-            Quantité : {{product.pivot.quantity}}
-          </li>
-        </ul>
-      </li>
-    </ul>
+          <h3 class="m-b-0" style="font-size: 25px;">Livreur :<strong class="text-primary" style="font-size: 20px">  {{order.delivery_man.first_name}} {{order.delivery_man.last_name}}</strong></h3>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="header">
+        <h2><strong>Informations</strong> des produits</h2>
+      </div>
+      <div class="body">
+        <div class="row clearfix">
+
+          <ul>
+            <li>
+              <h3 class="m-b-0" style="font-size: 25px;">Prix Min :<strong class="text-primary" style="font-size: 20px"> {{order.price_min}}</strong></h3>
+            </li>
+            <li>
+              <h3 class="m-b-0" style="font-size: 25px;">Prix Max :<strong class="text-primary" style="font-size: 20px"> {{order.price_max}}</strong></h3>
+            </li>
+            <li>
+              <h3 class="m-b-0" style="font-size: 25px;"> Products :</h3>
+              <ul>
+                <li *ngFor="let product of order.products">
+                  <h3 class="m-b-0" style="font-size: 20px;">Product : <strong class="text-primary">{{product.name}}</strong></h3>
+                  <h3 class="m-b-0" style="font-size: 20px;">Quantité : <strong class="text-primary"> {{product.pivot.quantity}}</strong></h3>
+
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!--    <ngx-notifier [allowDuplicates]="true"-->
+    <!--                  [allowHTML]="true"-->
+    <!--                  [className]="'exx'"-->
+    <!--                  [disableAnimations]="false"-->
+    <!--                  [dismissOnClick]="false"-->
+    <!--                  [duration]="5000"-->
+    <!--                  [insertOnTop]="true"-->
+    <!--                  [max]="5"-->
+    <!--    >-->
+    <!--    </ngx-notifier>-->
+
+
   </div>
-
-</ng-container>
+</div>

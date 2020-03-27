@@ -8,6 +8,11 @@ import {HeaderComponent} from './layout/header/header.component';
 import {NavbarComponent} from './layout/navbar/navbar.component';
 import {HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { SignInComponent } from './authentication/sign-in/sign-in.component';
+import { CreateAccountComponent } from './authentication/create-account/create-account.component';
+import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
+import {SharedModule} from './_modules/shared.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -17,14 +22,20 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     NavbarComponent,
     HomeComponent,
+    SignInComponent,
+    CreateAccountComponent,
+    AdminProfileComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes, {
       useHash: true
     }),
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
+  exports: [HeaderComponent, NavbarComponent, FooterComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

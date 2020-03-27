@@ -1,36 +1,53 @@
 <ng-container *ngIf="user">
-  <p>
-    Client : {{user.first_name}} {{user.last_name}}<br>
-    Address : {{user.client_details.address}}
-    , {{user.city}} {{user.client_details.zip_code}}
-  </p>
-  <div *ngIf="user.orders">
-    Commande
-    <ul>
-      <li *ngFor="let order of user.orders">
-        Date : {{order.created_at}}
+  <div class="card">
+    <div class="header">
+      <h2><strong>Informations</strong> du client</h2>
+    </div>
+    <div class="body">
+      <div class="row clearfix">
+        <h3 class="m-b-0" style="font-size: 19px;">Client :<strong class="text-primary" style="font-size: 15px"> {{user.first_name}} {{user.last_name}} </strong></h3>
+        <h3 class="m-b-0" style="font-size: 19px;" >Adresse :<strong class="text-primary" style="font-size: 15px"> {{user.client_details.address}}
+          , {{user.city}} {{user.client_details.zip_code}}</strong></h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="user.orders">
+    <div class="header">
+      <h2><strong>Les commandes </strong> du client</h2>
+    </div>
+    <div class="body" >
+      <div class="row clearfix">
         <ul>
-          <li>
-            Statut
-            : {{order.status === 0 ? 'annulée' : (order.status === 1 ? 'passée' : (order.status === 2 ? 'confirmée' : (order.status === 4 ? 'en livraison' : 'livrée')))}}
-          </li>
-          <li>
-            Min {{order.price_min}}
-          </li>
-          <li>
-            Max {{order.price_max}}
-          </li>
-          <li>
-            Produits
+          <li *ngFor="let order of user.orders">
+              <h3 class="m-b-0" style="font-size: 19px;">Date : <strong class="text-primary" style="font-size: 15px"> {{order.created_at}}</strong></h3>
             <ul>
-              <li *ngFor="let product of order.products">
-                Produit : {{product.name}} <br>
-                Quantité : {{product.pivot.quantity}}
+              <li>
+                <h3 class="m-b-0" style="font-size: 19px;"> Status
+                  : <strong class="text-primary" style="font-size: 15px">  {{order.status === 0 ? 'annulée' : (order.status === 1 ? 'passée' : (order.status === 2 ? 'confirmée' : (order.status === 4 ? 'en livraison' : 'livrée')))}}</strong></h3>
+              </li>
+              <li>
+                <h3 class="m-b-0" style="font-size: 19px;"> Prix Max:  <strong class="text-primary" style="font-size: 15px"> Min {{order.price_min}}</strong></h3>
+              </li>
+              <li>
+                <h3 class="m-b-0" style="font-size: 19px;">  Prix Min: <strong class="text-primary" style="font-size: 15px"> {{order.price_max}}</strong></h3>
+              </li>
+              <li>
+                <h3 class="m-b-0" style="font-size: 19px;"> Produits </h3>
+                <ul>
+                  <li *ngFor="let product of order.products">
+                    <h3 class="m-b-0" style="font-size: 19px;"> Produit : <strong class="text-primary" style="font-size: 15px">{{product.name}}</strong></h3> <br>
+                    <h3 class="m-b-0" style="font-size: 19px;"> Quantité : <strong class="text-primary" style="font-size: 15px">{{product.pivot.quantity}}</strong></h3>
+                  </li>
+                  <hr>
+                </ul>
               </li>
             </ul>
           </li>
+
         </ul>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
+
 </ng-container>

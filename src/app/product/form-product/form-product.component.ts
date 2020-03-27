@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BASE_API, CATEGORY, PRODUCT} from '../../_globals/vars';
 import {CategoryModel} from '../../_models/category.model';
 import {InitilizeJQScriptsService} from '../../_services/initilize-jqscripts.service';
-
+declare var $: any;
 @Component({
   selector: 'app-form-product',
   templateUrl: './form-product.component.html',
@@ -37,7 +37,7 @@ export class FormProductComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    // this.jqService.initilizeJQScript();
+    this.jqService.fixSelectJQBug();
     this.getAllCategories()
     this.initProductForm();
     if (this.productId) {

@@ -48,12 +48,11 @@
             </div>
           </div>
 
-          <div class="row clearfix">
-            <div class="col-sm-6">
-              <select class="form-control show-tick" formControlName="category_id">
-                <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-              </select>
-            </div>
+          <div class="col-lg-4 col-md-12">
+            <p> <b>Catégorie</b> </p>
+            <select formControlName="category_id" class="form-control show-tick z-index" data-live-search="true">
+              <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+            </select>
           </div>
 
 <!--          <div class="body">-->

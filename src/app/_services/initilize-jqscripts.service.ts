@@ -19,9 +19,22 @@ export class InitilizeJQScriptsService {
   jQurls = [
     'assets/bundles/mainscripts.bundle.js',
 ];
+
   constructor() {
   }
 
+
+  fixSelectJQBug() {
+  $.AdminCompass.select = {
+      activate: function () {
+        $.fn.selectpicker && $('select:not(.ms)').selectpicker()
+      }
+    }, $('.boxs-close').on('click', function () {
+      $(this).parents('.card').addClass('closed').fadeOut()
+    });
+    var edge = 'Microsoft Edge', ie10 = 'Internet Explorer 10', ie11 = 'Internet Explorer 11', opera = 'Opera',
+      firefox = 'Mozilla Firefox', chrome = 'Google Chrome', safari = 'Safari';
+  }
 
   initilizeJQScript() {
     this.jQurls.forEach((url) => {

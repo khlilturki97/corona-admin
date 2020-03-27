@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(private jqService: InitilizeJQScriptsService) { }
 
   ngOnInit() {
-    this.jqService.initilizeJQScript();
+     // this.jqService.initilizeSpinnerScript();
   }
 
 }

@@ -38,7 +38,9 @@
               "src/assets/css/color_skins.css",
               "node_modules/noty/lib/themes/metroui.css",
               "node_modules/noty/lib/themes/sunset.css",
-              "node_modules/noty/lib/noty.css"
+              "node_modules/noty/lib/noty.css",
+              "src/assets/plugins/jquery-spinner/css/bootstrap-spinner.css",
+              "src/assets/plugins/bootstrap-select/css/bootstrap-select.css"
             ],
             "scripts": [
               "src/assets/bundles/libscripts.bundle.js",
