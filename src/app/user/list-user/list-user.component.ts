@@ -110,13 +110,19 @@ export class ListUserComponent implements OnInit {
               title: 'phone',
               searchKey: 'phone',
               sortKey: 'phone'
+            },
+            {
+              title: 'city',
+              searchKey: 'city',
+              sortKey: 'city'
             }
           ];
           this.fieldsName = [
             'first_name',
             'last_name',
             'email',
-            'phone'
+            'phone',
+            'city'
           ]
         }
       });

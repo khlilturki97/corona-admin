@@ -6,7 +6,7 @@
         <h2><strong>Catégorie</strong></h2>
       </div>
       <div class="body">
-        <form (ngSubmit)="submitForm()" [formGroup]="productForm">
+        <form (ngSubmit)="submitForm()" [formGroup]="productForm" enctype="multipart/form-data">
           <div class="row clearfix">
             <div class="col-md-6 col-12">
               <div class="form-group">

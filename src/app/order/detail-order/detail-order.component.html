@@ -6,8 +6,8 @@
       </div>
       <div class="body">
         <div class="row clearfix">
-          <h3 class="m-b-0" style="font-size: 25px;">Client :<strong class="text-primary" style="font-size: 20px"> {{order.client.first_name}} {{order.client.last_name}}</strong></h3>
-          <h3 class="m-b-0" style="font-size: 25px;" >Adresse :<strong class="text-primary" style="font-size: 20px"> {{order.client.client_details.address}} ,{{order.client.city}} ,{{order.client.client_details.zip_code}}</strong></h3>
+          <h3 class="m-b-0" style="font-size: 25px;">Client :<strong class="text-primary" style="font-size: 20px"> {{order?.client.first_name}} {{order?.client?.last_name}}</strong></h3>
+          <h3 class="m-b-0" style="font-size: 25px;" >Adresse :<strong class="text-primary" style="font-size: 20px"> {{order?.client?.client_details?.address}} ,{{order?.client?.city}} ,{{order?.client?.client_details?.zip_code}}</strong></h3>
         </div>
       </div>
     </div>
@@ -18,54 +18,74 @@
       <div class="body">
         <div class="row clearfix">
 
-          <h3 class="m-b-0" style="font-size: 25px;">Livreur :<strong class="text-primary" style="font-size: 20px">  {{order.delivery_man.first_name}} {{order.delivery_man.last_name}}</strong></h3>
+          <h3 class="m-b-0" style="font-size: 25px;">Livreur :<strong class="text-primary" style="font-size: 20px">  {{order?.delivery_man?.first_name}} {{order?.delivery_man?.last_name}}</strong></h3>
 
         </div>
       </div>
     </div>
+
+<!--    <div class="card">-->
+<!--      <div class="header">-->
+<!--        <h2><strong>Informations</strong> des produits</h2>-->
+<!--      </div>-->
+<!--      <div class="body">-->
+<!--        <div class="row clearfix">-->
+
+<!--          <ul>-->
+<!--            <li>-->
+<!--              <h3 class="m-b-0" style="font-size: 25px;">Prix Min :<strong class="text-primary" style="font-size: 20px"> {{order.price_min}}</strong></h3>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <h3 class="m-b-0" style="font-size: 25px;">Prix Max :<strong class="text-primary" style="font-size: 20px"> {{order.price_max}}</strong></h3>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <h3 class="m-b-0" style="font-size: 25px;"> Products :</h3>-->
+<!--              <ul>-->
+<!--                <li *ngFor="let product of order.products">-->
+<!--                  <h3 class="m-b-0" style="font-size: 20px;">Product : <strong class="text-primary">{{product.name}}</strong></h3>-->
+<!--                  <h3 class="m-b-0" style="font-size: 20px;">Quantité : <strong class="text-primary"> {{product.pivot.quantity}}</strong></h3>-->
+
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </li>-->
+<!--          </ul>-->
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <div class="card">
       <div class="header">
-        <h2><strong>Informations</strong> des produits</h2>
+        <h2 ><strong>Informations</strong> de la commande</h2>
       </div>
-      <div class="body">
-        <div class="row clearfix">
 
-          <ul>
-            <li>
-              <h3 class="m-b-0" style="font-size: 25px;">Prix Min :<strong class="text-primary" style="font-size: 20px"> {{order.price_min}}</strong></h3>
-            </li>
-            <li>
-              <h3 class="m-b-0" style="font-size: 25px;">Prix Max :<strong class="text-primary" style="font-size: 20px"> {{order.price_max}}</strong></h3>
-            </li>
-            <li>
-              <h3 class="m-b-0" style="font-size: 25px;"> Products :</h3>
-              <ul>
-                <li *ngFor="let product of order.products">
-                  <h3 class="m-b-0" style="font-size: 20px;">Product : <strong class="text-primary">{{product.name}}</strong></h3>
-                  <h3 class="m-b-0" style="font-size: 20px;">Quantité : <strong class="text-primary"> {{product.pivot.quantity}}</strong></h3>
-
-                </li>
-              </ul>
-            </li>
-          </ul>
-
-        </div>
+      <div class="body table-responsive">
+        <table class="table table-hover m-b-0">
+          <thead>
+          <tr>
+            <th><strong class="text-primary" style="font-size: 15px">Product</strong></th>
+            <th><strong class="text-primary" style="font-size: 15px">Prix Min</strong></th>
+            <th><strong class="text-primary" style="font-size: 15px">Prix Max</strong></th>
+            <th data-breakpoints="sm xs"><strong class="text-primary" style="font-size: 15px">Quantity</strong></th>
+            <th data-breakpoints="xs"><strong class="text-primary" style="font-size: 15px">Max quantity</strong></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr
+            *ngFor="let product of order.products; let i = index"
+            style="cursor: pointer"
+          >
+            <td><strong>{{product.name}}</strong></td>
+            <td><h5>{{product?.price_min}}</h5></td>
+            <td><h5>{{product?.price_max}}</h5></td>
+            <td>{{product.pivot.quantity}}</td>
+            <td>{{product.max_quantity}}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
+
     </div>
-
-
-    <!--    <ngx-notifier [allowDuplicates]="true"-->
-    <!--                  [allowHTML]="true"-->
-    <!--                  [className]="'exx'"-->
-    <!--                  [disableAnimations]="false"-->
-    <!--                  [dismissOnClick]="false"-->
-    <!--                  [duration]="5000"-->
-    <!--                  [insertOnTop]="true"-->
-    <!--                  [max]="5"-->
-    <!--    >-->
-    <!--    </ngx-notifier>-->
-
 
   </div>
 </div>

@@ -8,7 +8,7 @@ import {InitilizeJQScriptsService} from '../../_services/initilize-jqscripts.ser
   styleUrls: ['./detail-category.component.css']
 })
 export class DetailCategoryComponent implements OnInit {
-  @Input() category: CategoryModel;
+  @Input() category: any;
 
   constructor(private jqService: InitilizeJQScriptsService) {
   }

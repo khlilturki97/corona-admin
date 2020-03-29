@@ -50,6 +50,16 @@ export class ListOrderComponent implements OnInit {
               sortKey: 'id'
             },
             {
+              title: 'name',
+              searchKey: 'client@first_name',
+              sortKey: 'client@first_name'
+            },
+            {
+              title: 'email',
+              searchKey: 'client@email',
+              sortKey: 'client@email'
+            },
+            {
               title: 'price_min',
               searchKey: 'price_min',
               sortKey: 'price_min'
@@ -61,8 +71,8 @@ export class ListOrderComponent implements OnInit {
             },
             {
               title: 'zone',
-              searchKey: 'client@clientDetails@city',
-              sortKey: 'client@clientDetails@city'
+              searchKey: 'client@city',
+              sortKey: 'client@city'
             },
             {
               title: 'created_at',
@@ -72,9 +82,11 @@ export class ListOrderComponent implements OnInit {
           ];
           this.fieldsName = [
             'id',
+            'client.first_name',
+            'client.email',
             'price_min',
             'price_max',
-            'client.client_details.city',
+            'client.city',
             'created_at'
           ]
         } else {
@@ -96,7 +108,7 @@ export class ListOrderComponent implements OnInit {
               sortKey: 'price_max'
             },
             {
-              title: 'prenom Livreur',
+              title: 'delivery name',
               searchKey: 'deliveryMan@first_name',
               sortKey: 'deliveryMan@first_name'
             },

@@ -1,13 +1,34 @@
 <ng-container *ngIf="category">
-  <div>
-    <h3 class="m-b-0" style="font-size: 19px;">Produits : </h3>
-    <ul>
-      <li *ngFor="let product of category.products">
-        <h3 class="m-b-0" style="font-size: 19px;">Nom : <strong class="text-primary" style="font-size: 15px"> {{product.name}}</strong></h3><br>
-        <h3 class="m-b-0" style="font-size: 19px;">Prix min:  <strong class="text-primary" style="font-size: 15px"> {{product.price_min}}</strong></h3><br>
-        <h3 class="m-b-0" style="font-size: 19px;">Prix Max : <strong class="text-primary" style="font-size: 15px"> {{product.price_max}}</strong></h3>
+  <div class="card">
+    <div class="header">
+      <h2 ><strong>Les produits de </strong> {{category?.name}}</h2>
+    </div>
+    <div class="body table-responsive">
+      <table class="table table-hover m-b-0">
+        <thead>
+        <tr>
+          <th><strong class="text-primary" style="font-size: 15px">Image</strong></th>
+          <th><strong class="text-primary" style="font-size: 15px">Product</strong></th>
+          <th><strong class="text-primary" style="font-size: 15px">Prix Min</strong></th>
+          <th><strong class="text-primary" style="font-size: 15px">Prix Max</strong></th>
+          <th><strong class="text-primary" style="font-size: 15px">Max quantity</strong></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr
+          *ngFor="let product of category.products; let i = index"
+          style="cursor: pointer"
+        >
+          <td><img alt="Product img" src="{{product?.image|fixImagePath}}" width="48"></td>
+          <td><strong>{{product?.name}}</strong></td>
+          <td><h5>{{product?.price_min}}</h5></td>
+          <td><h5>{{product?.price_max}}</h5></td>
+          <td>{{product.max_quantity}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
-      </li>
-    </ul>
   </div>
+
 </ng-container>

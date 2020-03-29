@@ -6,55 +6,58 @@
         <div class="card">
           <ul class="nav nav-tabs">
             <div class="col-lg-4 col-md-12"></div>
-            <li class="nav-item"><a routerLink="/sign-in"  class="nav-link active"  data-toggle="tab" >Se connecter</a></li>
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" routerLink="/sign-in">Se connecter</a>
+            </li>
           </ul>
         </div>
-<div class="tab-content">
-  <div class="tab-pane active" id="usersettings" role="tabpanel">
-    <form (ngSubmit)="onSubmitLoginForm()" [formGroup]="loginForm">
-      <div class="card">
-        <div class="header">
-          <h2><strong>Coordonnées</strong> d'authentification</h2>
-        </div>
-        <div class="body">
-          <div class="row">
-            <div class="col-lg-11 col-md-12">
+        <div class="tab-content">
+          <div class="tab-pane active" id="usersettings" role="tabpanel">
+            <form (ngSubmit)="onSubmitLoginForm()" [formGroup]="loginForm">
+              <div class="card">
+                <div class="header">
+                  <h2><strong>Coordonnées</strong> d'authentification</h2>
+                </div>
+                <div class="body">
+                  <div class="row">
+                    <div class="col-lg-11 col-md-12">
 
-              <div class="input-group">
-                <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-                <input class="form-control email" formControlName="email" placeholder="Ex: example@example.com"
-                       type="email">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                        <input class="form-control email" formControlName="email" placeholder="Ex: example@example.com"
+                               type="email">
+                      </div>
+                    </div>
+                    <i *ngIf="submitted && error"
+                       class="material-icons iconColor col-md-1 ">error_outline</i>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-11 col-md-12">
+
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="material-icons password">lock</i></span>
+                        <input class="form-control email" formControlName="password" placeholder="Password"
+                               type="password">
+                      </div>
+                    </div>
+                    <i *ngIf="submitted && error"
+                       class="material-icons iconColor col-md-1 ">error_outline</i>
+
+                  </div>
+                  <div class="col-md-12 row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                      <button class="btn btn-primary btn-round" type="submit">Save Changes</button>
+                    </div>
+                    <div class="col-md-4"></div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <i *ngIf="submitted && error"
-               class="material-icons iconColor col-md-1 ">error_outline</i>
 
-          </div>
-          <div class="row">
-            <div class="col-lg-11 col-md-12">
+            </form>
 
-              <div class="input-group">
-                <span class="input-group-addon"><i class="material-icons password">lock</i></span>
-                <input class="form-control email" formControlName="password" placeholder="Password"
-                       type="password">
-              </div>
-            </div>
-            <i *ngIf="submitted && error"
-               class="material-icons iconColor col-md-1 ">error_outline</i>
-
-          </div>
-          <div class="col-md-12 row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"><button class="btn btn-primary btn-round" type="submit">Save Changes</button></div>
-            <div class="col-md-4"></div>
           </div>
         </div>
-      </div>
-
-    </form>
-
-  </div>
-</div>
       </div>
       <div class="col-lg-3"></div>
     </div>

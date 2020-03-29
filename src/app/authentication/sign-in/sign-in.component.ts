@@ -21,7 +21,7 @@ export class SignInComponent implements OnInit {
               private authenticationService: AuthenticationService
   ) {
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/order/list']);
     }
   }
 
@@ -58,7 +58,10 @@ export class SignInComponent implements OnInit {
         (data) => {
           console.log('success , logging in . . .');
           console.log(data);
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate([this.returnUrl]).then(
+            () => {
+              window.location.reload();
+            });
         },
         error => {
           console.log('error on sign  in');

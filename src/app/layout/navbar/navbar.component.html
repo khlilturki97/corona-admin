@@ -4,7 +4,7 @@
     <ul class="list">
       <li>
         <div class="user-info">
-          <div class="image"><a routerLink="/profile"><img src="assets/images/profile_av.jpg" alt="User"></a></div>
+          <div class="image"><a routerLink="/profile"><img src="assets/images/admin.png" alt="User"></a></div>
           <div class="detail">
             <h4>{{this.currentUser?.first_name}}  {{this.currentUser?.last_name}}</h4>
             <small>{{this.currentUser?.email}}</small>
@@ -97,15 +97,15 @@
       <li>
         <a class="menu-toggle" >
           <i class="zmdi zmdi-shopping-cart"></i>
-          <span>category</span>
+          <span>product</span>
         </a>
         <ul class="ml-menu">
           <li>
-            <a routerLink="/category/form">
-              Ajouter categorie
+            <a routerLink="/product/form">
+              Ajouter product
             </a>
-            <a routerLink="/category">
-              Liste categori
+            <a routerLink="/product">
+              Liste product
             </a>
           </li>
         </ul>
@@ -126,7 +126,22 @@
           </li>
         </ul>
       </li>
-<!--      <li><a class="menu-toggle" ><i class="zmdi zmdi-shopping-cart"></i><span>Profile</span>-->
+      <li>
+        <a class="menu-toggle" >
+          <i class="zmdi zmdi-shopping-cart"></i>
+          <span>Réclamations</span>
+        </a>
+        <ul class="ml-menu">
+          <li>
+            <a routerLink="/claims">
+              Liste réclamations
+            </a>
+          </li>
+        </ul>
+      </li>
+
+
+      <!--      <li><a class="menu-toggle" ><i class="zmdi zmdi-shopping-cart"></i><span>Profile</span>-->
 <!--      </a>-->
 <!--        <ul class="ml-menu">-->
 <!--          <li><a routerLink="/profile">Consulter profil</a></li>-->

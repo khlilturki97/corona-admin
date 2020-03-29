@@ -13,6 +13,7 @@ import { CreateAccountComponent } from './authentication/create-account/create-a
 import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
 import {SharedModule} from './_modules/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ClaimComponent } from './claim/claim.component';
 
 
 @NgModule({
@@ -26,6 +27,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CreateAccountComponent,
     AdminProfileComponent,
     NotFoundComponent,
+    ClaimComponent,
+
   ],
   imports: [
     BrowserAnimationsModule,

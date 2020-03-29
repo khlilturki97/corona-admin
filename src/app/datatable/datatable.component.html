@@ -14,11 +14,11 @@
     <div *ngIf="nbSearchFields>0">
       {{"SEARCH" }} :
       <ng-container *ngFor="let header of headers">
-        <p *ngIf="searchFields[header.searchKey]&&searchFields[header.searchKey]!==''">
-          {{header.title}} :
-          {{searchFields[header.searchKey + '_between1'] && searchFields[header.searchKey + '_between2'] ?
-            (searchFields[header.searchKey + '_between1']|date:'dd-MM-yyyy') + '->' + (searchFields[header.searchKey + '_between2']|date:'dd-MM-yyyy') :
-            searchFields[header.searchKey]
+        <p *ngIf="searchFields[header?.searchKey]&&searchFields[header?.searchKey]!==''">
+          {{header?.title}} :
+          {{searchFields[header?.searchKey + '_between1'] && searchFields[header?.searchKey + '_between2'] ?
+            (searchFields[header?.searchKey + '_between1']|date:'dd-MM-yyyy') + '->' + (searchFields[header?.searchKey + '_between2']|date:'dd-MM-yyyy') :
+            searchFields[header?.searchKey]
           }}
           <button (click)="reset(header.isDate,header.sortKey)" nz-button
                   nzSize="small">{{"RESET"  }}</button>
@@ -44,15 +44,15 @@
         <tr>
           <th *ngIf="hasDetails"></th>
           <th *ngFor="let header of headers;let i=index"
-              [nzShowSort]="header.sortKey!==null" [nzSortKey]="header.sortKey"
-              nzCustomFilter>{{header.title }}
+              [nzShowSort]="header?.sortKey!==null" [nzSortKey]="header?.sortKey"
+              nzCustomFilter>{{header?.title }}
 
             <i #searchIcon="nzDropdown"
                (click)="setSearch(i)"
-               *ngIf="header.searchKey!==null"
-               [class.ant-table-filter-open]="searchIcon.nzVisible"
+               *ngIf="header?.searchKey!==null"
+               [class.ant-table-filter-open]="searchIcon?.nzVisible"
                [nzClickHide]="true"
-               [nzDropdownMenu]="header.isDate?dateDropDown:searchDropDown"
+               [nzDropdownMenu]="header?.isDate?dateDropDown:searchDropDown"
                class="ant-table-filter-icon"
                nz-dropdown
                nz-icon
@@ -73,28 +73,28 @@
         </thead>
         <tbody>
         <tr (click)="hasDetails?updateCheckBox(j,$event):null"
-            (dblclick)="canEditThrowForm?navigateTo(createUpdateRoute(data[data.length-1])):null"
-            *ngFor="let data of basicTable.data;let j=index"
+            (dblclick)="canEditThrowForm?navigateTo(createUpdateRoute(data[data?.length-1])):null"
+            *ngFor="let data of basicTable?.data;let j=index"
             [class.cursor-pointer]="canEditThrowForm"
             [class.editable-row]="canEditThrowDatatable">
           <td (nzCheckedChange)="updateCheckBox(j)" *ngIf="hasDetails" [class.selected-td]="selectedLine===j"
               [nzChecked]="selectedLine===j"
               nzShowCheckbox></td>
           <ng-container *ngFor="let field of data;let l=last;let i=index">
-            <td *ngIf="!l&&!headers[i].datatableEditKey" [class.selected-td]="selectedLine===j">
-              <ng-container *ngIf="!headers[i].isImage">
+            <td *ngIf="!l&&!headers[i]?.datatableEditKey" [class.selected-td]="selectedLine===j">
+              <ng-container *ngIf="!headers[i]?.isImage">
                 {{field}}
               </ng-container>
               <img [src]="field|imageUrl" alt="" *ngIf="headers[i].isImage" style="max-width: 200px">
             </td>
-            <td *ngIf="!l&&headers[i].datatableEditKey" [class.selected-td]="selectedLine===j">
-              <div *ngIf="!editCache[data[data.length-1]].edit; else editCode" class="editable-cell">
+            <td *ngIf="!l&&headers[i]?.datatableEditKey" [class.selected-td]="selectedLine===j">
+              <div *ngIf="!editCache[data[data?.length-1]]?.edit; else editCode" class="editable-cell">
                 <div class="editable-cell-value-wrap">
                   {{field}}
                 </div>
               </div>
               <ng-template #editCode>
-                <input [(ngModel)]="editCache[data[data.length-1]].data[headers[i].datatableEditKey]" nz-input
+                <input [(ngModel)]="editCache[data[data?.length-1]]?.data[headers[i]?.datatableEditKey]" nz-input
                        type="text"/>
               </ng-template>
             </td>
@@ -102,9 +102,9 @@
             <td *ngIf="l&&(canDo(deletePermission)||(canEditThrowDatatable))"
                 [class.editable-row-operations]="canEditThrowDatatable"
                 [class.selected-td]="selectedLine===j">
-              <ng-container *ngIf="!editCache[data[data.length-1]].edit; else saveTpl">
+              <ng-container *ngIf="!editCache[data[data?.length-1]]?.edit; else saveTpl">
 
-                <a (click)="startEdit(data[data.length-1])" *ngIf="canEditThrowDatatable"
+                <a (click)="startEdit(data[data?.length-1])" *ngIf="canEditThrowDatatable"
                    class="p-1 btn mr-2">
                   <i nz-icon nzTheme="outline" nzType="edit"></i>
                 </a>
@@ -116,13 +116,13 @@
                 </a>
               </ng-container>
               <ng-template #saveTpl>
-                <a (click)="saveEdit(data[data.length-1])" *ngIf="!compareObjects(data[data.length-1])" class="mr-2">
+                <a (click)="saveEdit(data[data?.length-1])" *ngIf="!compareObjects(data[data?.length-1])" class="mr-2">
                   <i nz-icon nzTheme="outline" nzType="save"></i>
                 </a>
-                <a (click)="cancelEdit(data[data.length-1])" *ngIf="compareObjects(data[data.length-1])">
+                <a (click)="cancelEdit(data[data?.length-1])" *ngIf="compareObjects(data[data?.length-1])">
                   <i nz-icon nzTheme="outline" nzType="close"></i>
                 </a>
-                <a (nzOnConfirm)="cancelEdit(data[data.length-1])" *ngIf="!compareObjects(data[data.length-1])"
+                <a (nzOnConfirm)="cancelEdit(data[data?.length-1])" *ngIf="!compareObjects(data[data?.length-1])"
                    nz-popconfirm
                    nzTitle="Sure to cancel?">
                   <i nz-icon nzTheme="outline" nzType="close"></i>

@@ -44,7 +44,8 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('adminCoronaDelivery');
     this.currentUserSubject.next(null);
-    this.router.navigateByUrl('/login');
+    window.location.reload();
+    setTimeout(() => this.router.navigateByUrl('/sign-in'),3000);
 
   }
 

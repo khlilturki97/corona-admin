@@ -235,6 +235,7 @@ export class DatatableComponent implements OnInit, OnChanges {
    * Delete element
    */
   deleteElement(id: any, e: MouseEvent = null) {
+    console.log('kneee')
     e.preventDefault();
     e.stopPropagation();
     if (confirm('You sure?')) {
@@ -450,6 +451,8 @@ export class DatatableComponent implements OnInit, OnChanges {
         const fieldSplit = field.split('.');
         let output = element[fieldSplit[0]];
         for (let i = 1; i < fieldSplit.length; i++) {
+          console.log(output)
+          console.log(fieldSplit[i]);
           output = output[fieldSplit[i]];
         }
         result.push(output);
