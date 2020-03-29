@@ -14,6 +14,7 @@ import { AdminProfileComponent } from './profile/admin-profile/admin-profile.com
 import {SharedModule} from './_modules/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ClaimComponent } from './claim/claim.component';
+import {SettingsComponent} from './layout/settings/settings.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ClaimComponent } from './claim/claim.component';
     CreateAccountComponent,
     AdminProfileComponent,
     NotFoundComponent,
+    SettingsComponent,
     ClaimComponent,
 
   ],
