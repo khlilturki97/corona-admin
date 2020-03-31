@@ -33,7 +33,8 @@ import {SettingsComponent} from './layout/settings/settings.component';
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes, {
-      useHash: true
+      useHash: true,
+      scrollPositionRestoration: 'enabled'
     }),
     HttpClientModule,
     SharedModule
