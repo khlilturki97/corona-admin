@@ -318,6 +318,13 @@ export class DatatableComponent implements OnInit, OnChanges {
   saveEdit(id: string): void {
     console.log('save');
     const index = this.elements.findIndex(item => item.id === id);
+    // const data = this.editCache[id].data;
+    // for (const header of this.headers) {
+    //   if (header.isImage) {
+    //     delete data[header.searchKey]
+    //   }
+    // }
+    // console.log(data)
     this.loading = true;
     this.crud.update(this.url, id, this.editCache[id].data)
       .subscribe(() => {
