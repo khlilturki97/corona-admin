@@ -7,7 +7,6 @@ import {FooterComponent} from './layout/footer/footer.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {NavbarComponent} from './layout/navbar/navbar.component';
 import {HttpClientModule} from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { CreateAccountComponent } from './authentication/create-account/create-account.component';
 import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
@@ -23,7 +22,6 @@ import {SettingsComponent} from './layout/settings/settings.component';
     FooterComponent,
     HeaderComponent,
     NavbarComponent,
-    HomeComponent,
     SignInComponent,
     CreateAccountComponent,
     AdminProfileComponent,

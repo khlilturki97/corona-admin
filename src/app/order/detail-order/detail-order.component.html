@@ -18,7 +18,7 @@
       <div class="body">
         <div class="row clearfix">
 
-          <h3 class="m-b-0" style="font-size: 25px;">Livreur :<strong class="text-primary" style="font-size: 20px">  {{order?.delivery_man?.first_name}} {{order?.delivery_man?.last_name}}</strong></h3>
+          <h3 class="m-b-0" style="font-size: 25px;">Livreur :<strong class="text-primary" style="font-size: 20px">  {{order?.delivery_man?.first_name?order?.delivery_man?.first_name:'Pas de livreur assigné'}} {{order?.delivery_man?.last_name}}</strong></h3>
 
         </div>
       </div>

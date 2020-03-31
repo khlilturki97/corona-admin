@@ -3,7 +3,7 @@
   <div class="col-lg-12 col-md-12 col-sm-12">
     <div class="card">
       <div class="header">
-        <h2><strong>Catégorie</strong></h2>
+        <h2><strong>Produit</strong></h2>
       </div>
       <div class="body">
         <form (ngSubmit)="submitForm()" [formGroup]="productForm" enctype="multipart/form-data">
@@ -64,20 +64,16 @@
 
 <!--            </form>-->
 <!--          </div>-->
-          <div class="row clearfix">
-            <div class="col-md-6 col-12">
-              <div class="dz-message">
-                <div class="drag-icon-cph"><i class="material-icons">touch_app</i></div>
-                <h3>Drop files here or click to upload.</h3>
-                <em>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</em>
-              </div>
-              <div class="fallback">
-                <input #imageInput (change)="processFile($event)"
-                       accept="image/*" name="file" type="file"/>
-              </div>
+
+          <br>
+          <div class="input-group col-md-6" >
+            <div class="custom-file">
+              <input #imageInput (change)="processFile($event)" type="file" class="custom-file-input" id="inputGroupFile01"
+                     accept="image/*" name="file" aria-describedby="inputGroupFileAddon01">
+              <label class="custom-file-label" for="inputGroupFile01">Choisir une image</label>
             </div>
           </div>
-
+          <br>
           <button class="btn btn-primary">Enregistrer</button>
         </form>
       </div>

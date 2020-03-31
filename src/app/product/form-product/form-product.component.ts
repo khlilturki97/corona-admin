@@ -39,7 +39,7 @@ export class FormProductComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.jqService.fixSelectJQBug();
+    // this.jqService.initilizeJQScript();
     this.getAllCategories()
     this.initProductForm();
     if (this.productId) {

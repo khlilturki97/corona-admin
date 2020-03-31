@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
 import {SignInComponent} from './authentication/sign-in/sign-in.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {AuthGuard} from './_helper/auth.gard';
@@ -8,18 +7,13 @@ import {ClaimComponent} from './claim/claim.component';
 
 export const AppRoutes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'claims',
     component: ClaimComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'home',
-    component: HomeComponent,
+    path: '',
+    loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
     canActivate: [AuthGuard]
   },
   {
