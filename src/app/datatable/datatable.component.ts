@@ -446,9 +446,11 @@ export class DatatableComponent implements OnInit, OnChanges {
     this.dataToDisplay = [];
     this.elements.forEach(element => {
       // const dataToDisplay = [];
+      console.log(element)
       const result = [];
       for (const field of this.fieldsName) {
         const fieldSplit = field.split('.');
+        console.log(field)
         let output = element[fieldSplit[0]];
         for (let i = 1; i < fieldSplit.length; i++) {
           console.log(output)

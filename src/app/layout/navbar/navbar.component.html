@@ -4,7 +4,7 @@
     <ul class="list">
       <li>
         <div class="user-info">
-          <div class="image"><a routerLink="/profile"><img src="assets/images/admin.png" alt="User"></a></div>
+          <div class="image"><a ><img src="assets/images/admin.png" alt="User"></a></div>
           <div class="detail">
             <h4>{{this.currentUser?.first_name}}  {{this.currentUser?.last_name}}</h4>
             <small>{{this.currentUser?.email}}</small>
@@ -113,15 +113,15 @@
       <li>
         <a class="menu-toggle" >
           <i class="zmdi zmdi-shopping-cart"></i>
-          <span>product</span>
+          <span>Catégorie</span>
         </a>
         <ul class="ml-menu">
           <li>
-            <a routerLink="/product/form">
-              Ajouter product
+            <a routerLink="/category/form">
+              Ajouter cotégorie
             </a>
-            <a routerLink="/product">
-              Liste product
+            <a routerLink="/category">
+              Liste catégories
             </a>
           </li>
         </ul>

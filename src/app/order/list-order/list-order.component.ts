@@ -38,8 +38,8 @@ export class ListOrderComponent implements OnInit {
         } else if (this.type === 'pending') {
           this.url = BASE_API + ORDER + NOT_ASSIGNED
         }
-        console.log(this.url)
-        this.selectedOrder = null
+        console.log(this.url);
+        this.selectedOrder = null;
         // this.show = true
         if (this.type === 'passed') {
 
@@ -56,6 +56,55 @@ export class ListOrderComponent implements OnInit {
             },
             {
               title: 'email',
+              searchKey: 'client@email',
+              sortKey: 'client@email'
+            },
+            {
+              title: 'price_min',
+              searchKey: 'price_min',
+              sortKey: 'price_min'
+            },
+            {
+              title: 'price_max',
+              searchKey: 'price_max',
+              sortKey: 'price_max'
+            },
+            {
+              title: 'zone',
+              searchKey: 'client@city',
+              sortKey: 'client@city'
+            },
+            {
+              title: 'created_at',
+              searchKey: 'created_at',
+              sortKey: 'created_at'
+            }
+          ];
+          this.fieldsName = [
+            'id',
+            'client.first_name',
+            'client.email',
+            'price_min',
+            'price_max',
+            'client.city',
+            'created_at'
+          ]
+        } else
+          if (this.type === 'pending') {
+
+          this.headers = [
+            {
+              title: 'id',
+              searchKey: 'id',
+              sortKey: 'id'
+            },
+            {
+              title: 'client name',
+              searchKey: 'client@first_name',
+              sortKey: 'client@first_name'
+            },
+            {
+              title: 'client email',
               searchKey: 'client@email',
               sortKey: 'client@email'
             },
