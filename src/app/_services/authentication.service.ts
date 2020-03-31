@@ -23,7 +23,7 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    return this.http.post<any>(BASE_API + LOGIN, {email, password})
+    return this.http.post<any>(BASE_API + LOGIN, {email, password, role: 'admin'})
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('adminCoronaDelivery', JSON.stringify(user));
@@ -45,7 +45,7 @@ export class AuthenticationService {
     localStorage.removeItem('adminCoronaDelivery');
     this.currentUserSubject.next(null);
     window.location.reload();
-    setTimeout(() => this.router.navigateByUrl('/sign-in'),3000);
+    setTimeout(() => this.router.navigateByUrl('/sign-in'), 1000);
 
   }
 
@@ -67,13 +67,13 @@ export class AuthenticationService {
   }
 
   getCurrentUser() {
-      const token = this.currentUserValue.access_token;
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization:  'Bearer ' + token
-      });
+    const token = this.currentUserValue.access_token;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    });
 
-      return this.http.get(BASE_API + CURRENT_USER, {headers});
+    return this.http.get(BASE_API + CURRENT_USER, {headers});
 
   }
 }
