@@ -77,7 +77,7 @@ export class FormCategoryComponent implements OnInit, OnChanges {
   private getOneCategory() {
     this.crud.getOne<CategoryModel>(this.categoryUrl, this.categoryId)
       .subscribe(category => {
-        this.category = category
+        this.category = category;
         this.initCategoryForm()
       })
   }

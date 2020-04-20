@@ -12,7 +12,7 @@ export const AppRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: '', redirectTo: 'order', pathMatch: 'full'
+    path: '', redirectTo: 'order/passed', pathMatch: 'full'
   },
   {
     path: 'sign-in',
