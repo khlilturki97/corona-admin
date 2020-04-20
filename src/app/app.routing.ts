@@ -11,7 +11,9 @@ export const AppRoutes: Routes = [
     component: ClaimComponent,
     canActivate: [AuthGuard]
   },
-
+  {
+    path: '', redirectTo: 'order', pathMatch: 'full'
+  },
   {
     path: 'sign-in',
     component: SignInComponent
