@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://zawedni.tn:446'
+  baseUrl: 'http://51.254.36.135:7000'
 };

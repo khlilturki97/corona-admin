@@ -11,11 +11,7 @@ export const AppRoutes: Routes = [
     component: ClaimComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: '',
-    loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
-    canActivate: [AuthGuard]
-  },
+
   {
     path: 'sign-in',
     component: SignInComponent
